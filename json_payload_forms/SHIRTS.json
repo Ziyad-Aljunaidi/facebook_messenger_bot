@@ -1,0 +1,54 @@
+{
+
+    "attachment": {
+        "type": "template",
+        "payload": {
+            "template_type": "generic",
+            "elements": [{
+                "title": "Red Shirt",
+                "subtitle": "10$",
+                "image_url": "/images/redshirt.png",
+                "buttons": [
+                    {
+                        "type": "postback",
+                        "title": "Add to cart",
+                        "payload": "ADD"
+                    }
+                ]
+            },{
+                "title": "White Shirt",
+                "subtitle": "9$",
+                "image_url": "/images/whiteshirt.png",
+                "buttons": [
+                    {
+                        "type": "postback",
+                        "title": "Add to cart",
+                        "payload": "ADD"
+                    }
+                ]
+            },{
+                "title": "Polo Shirt",
+                "subtitle": "15$",
+                "image_url": "/images/poloshirt.png",
+                "buttons": [
+                    {
+                        "type": "postback",
+                        "title": "Add to cart",
+                        "payload": "ADD"
+                    }
+                ]
+            },{
+                "title": "Long Sleeve Shirt",
+                "subtitle": "18$",
+                "image_url": "/images/long_sleeve_shirt.png",
+                "buttons": [
+                    {
+                        "type": "postback",
+                        "title": "Add to cart",
+                        "payload": "ADD"
+                    }
+                ]
+            }]
+        }
+    }
+}

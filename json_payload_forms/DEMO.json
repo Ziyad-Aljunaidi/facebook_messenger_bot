@@ -1,0 +1,14 @@
+{
+    "text": "here is an example for a simple clothes online shop, what would you like to shop for?",
+    "quick_replies":[
+        {
+          "content_type":"text",
+          "title":"Shirts",
+          "payload":"SHIRTS"
+        },{
+          "content_type":"text",
+          "title":"Pants",
+          "payload":"PANTS"
+        }
+      ]
+}

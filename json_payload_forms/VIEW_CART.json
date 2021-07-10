@@ -1,0 +1,27 @@
+{
+  "attachment": {
+      "type": "template",
+      "payload": {
+        "template_type": "generic",
+        "elements": [
+          {
+            "title": "Classic T-Shirt Collection",
+            "subtitle": "See all our colors",
+            "image_url": "/images/redshirt.png",          
+            "buttons": [
+              {
+            
+                "title": "View",
+                "type": "web_url",
+                "url": "/test",
+                "messenger_extensions": true,
+                "webview_height_ratio": "tall",
+                "fallback_url": "/test"            
+                  
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

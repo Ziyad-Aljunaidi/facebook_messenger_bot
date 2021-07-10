@@ -1,0 +1,64 @@
+{
+     "attachment": {
+         "type": "template",
+         "payload": {
+             "template_type": "generic",
+             "elements": [{
+                 "title": "Cargo Pants",
+                 "subtitle": "11$",
+                 "image_url": "/images/cargo_pants.png",
+                 "buttons": [
+                     {
+                         "type": "postback",
+                         "title": "Add to cart",
+                         "payload": "ADD"
+                     }
+                 ]
+             },{
+                 "title": "Sweat Pants",
+                 "subtitle": "9$",
+                 "image_url": "/images/sweatpants.png",
+                 "buttons": [
+                     {
+                         "type": "postback",
+                         "title": "Add to cart",
+                         "payload": "ADD"
+                     }
+                 ]
+             },{
+                 "title": "Denim Jeans",
+                 "subtitle": "22$",
+                 "image_url": "/images/jeans_pants.png",
+                 "buttons": [
+                     {
+                         "type": "postback",
+                         "title": "Add to cart",
+                         "payload": "ADD"
+                     }
+                 ]
+             },{
+                 "title": "Cargo Short",
+                 "subtitle": "12$",
+                 "image_url": "/images/cargo_short.png",
+                 "buttons": [
+                     {
+                         "type": "postback",
+                         "title": "Add to cart",
+                         "payload": "ADD"
+                     }
+                 ]
+             },{
+                 "title": "Denim Jeans Short",
+                 "subtitle": "19$",
+                 "image_url": "/images/jeans_short.png",
+                 "buttons": [
+                     {
+                         "type": "postback",
+                         "title": "Add to cart",
+                         "payload": "ADD"
+                     }
+                 ]
+             }]
+         }
+     }
+ }
