@@ -8,7 +8,7 @@ let server_domain = process.env.DOMAIN;
 
 //let VIEW_CART = json_data;
 //console.log(VIEW_CART)
-
+ 
 get_started_payload = JSON.parse(fs.readFileSync("json_payload_forms/GET_STARTED.json"));
 view_cart_payload = JSON.parse(fs.readFileSync("json_payload_forms/VIEW_CART.json"));
 demo_payload = JSON.parse(fs.readFileSync("json_payload_forms/DEMO.json"));
