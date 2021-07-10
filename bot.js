@@ -16,7 +16,7 @@ const
 
 // Setup Function For GET_STARTED Button
 function setupGetStartedButton(res) { 
-    var messageData = config.json_data_payload;
+    var messageData = config.get_started_payload;
     // Start the request
     request({
 
