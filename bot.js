@@ -11,7 +11,7 @@ const
 
 const  
     ngrok_url = process.env.DOMAIN,
-    VERFY_TOKEN = process.env.VERFY_TOKEN,
+    VERIFY_TOKEN = process.env.VERIFY_TOKEN,
     PAGE_ACCESS_TOKEN =  process.env.PAGE_ACCESS_TOKEN;
 
 // Setup Function For GET_STARTED Button
@@ -201,7 +201,7 @@ app.get('/webhook', (req, res) => {
     if (mode && token) {
 
         // Checks the mode and token sent is correct
-        if (mode === 'subscribe' && token === VERFY_TOKEN){
+        if (mode === 'subscribe' && token === VERIFY_TOKEN){
 
             // Responds with the challenge token from the request
             console.log('WEBHOOK_VERIFIED');
