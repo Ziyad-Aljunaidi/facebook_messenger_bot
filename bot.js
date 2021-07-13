@@ -84,39 +84,27 @@ function handleMessage(sender_psid, received_message) {
 // Handles messaging_postback events
 function handlePostback(sender_psid, received_postback) {
     let response;
+    let payload = received_postback.payload;
+    let paylod_list = {
+        "GET_STARTED": {"text": "Hello, how may I help you :)"},
+        "DEMO": config.demo_payload,
+        "SHIRTS": config.shirts_payload,
+        "PANTS": config.pants_payload,
+        "VIEW_CART": config.view_cart_payload,
+        "yes": {"text": "Thanks!"},
+        "no": {"text": "Oops, try sending another image."}
+    }
 
     // Get the payload for the postback
-    let payload = received_postback.payload;
-
-    // Set the response based on the postback payload
-    if (payload === 'yes') {
-        response = { "text": "Thanks!" }
-    } else if (payload === 'no') {
-        response = { "text": "Oops, try sending another image." }
-    }
-    else if (payload === "GET_STARTED") {
-        response = { "text": "meow1"
-
-        }
-    }
-    else if (payload === 'DEMO'){
-    
-        response = config.demo_payload;
+    try{
+        response = paylod_list[payload];
+    }catch(err){
+        console.log(err)
+        response = {"text": "Sorry I couldn't understand that."}
     }
 
-    else if (payload === 'SHIRTS'){
-        response = config.shirts_payload;
-    }
-    else if (payload === 'PANTS'){
-        response = config.pants_payload;
-    }
-
-    else if (payload === 'VIEW_CART') {
-        response = config.view_cart_payload;
-}
-
-    // Send the message to ackowledge the postback
     callSendAPI(sender_psid, response);
+
 }
 
 // Sends response message via the Send API
@@ -138,7 +126,6 @@ function callSendAPI(sender_psid, response) {
     }, (err, res, body) => {
         if (!err) {
             console.log('message sent!')
-            console.log(response)
         } else {
             console.error("Unable to send the message" + err);
         }
