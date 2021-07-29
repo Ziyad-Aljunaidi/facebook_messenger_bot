@@ -1,0 +1,69 @@
+{
+    "attachment": {
+        "type": "template",
+        "payload": {
+            "template_type": "generic",
+            "elements": [{
+                "item_id": "010",
+                "item_title": "Cargo Pants",
+                "subtitle": "11$",
+                "image_url": "/images/cargo_pants.png",
+                "buttons": [
+                    {
+                        "type": "postback",
+                        "title": "Add to cart",
+                        "payload": "010"
+                    }
+                ]
+            },{
+                "item_id": "011",
+                "item_title": "Sweat Pants",
+                "subtitle": "9$",
+                "image_url": "/images/sweatpants.png",
+                "buttons": [
+                    {
+                        "type": "postback",
+                        "title": "Add to cart",
+                        "payload": "011"
+                    }
+                ]
+            },{
+                "item_id": "012",
+                "item_title": "Denim Jeans",
+                "subtitle": "22$",
+                "image_url": "/images/jeans_pants.png",
+                "buttons": [
+                    {
+                        "type": "postback",
+                        "title": "Add to cart",
+                        "payload": "012"
+                    }
+                ]
+            },{
+                "item_id": "013",
+                "item_title": "Cargo Short",
+                "subtitle": "12$",
+                "image_url": "/images/cargo_short.png",
+                "buttons": [
+                    {
+                        "type": "postback",
+                        "title": "Add to cart",
+                        "payload": "013"
+                    }
+                ]
+            },{
+                "item_id": "014",
+                "item_title": "Denim Jeans Short",
+                "subtitle": "19$",
+                "image_url": "/images/jeans_short.png",
+                "buttons": [
+                    {
+                        "type": "postback",
+                        "title": "Add to cart",
+                        "payload": "014"
+                    }
+                ]
+            }]
+        }
+    }
+}

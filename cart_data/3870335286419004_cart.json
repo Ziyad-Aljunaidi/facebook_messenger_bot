@@ -1,0 +1,34 @@
+{
+  "items_object": [
+    {
+      "item_id": "000",
+      "item_title": "Red Shirt",
+      "price": "10$",
+      "quantity": 8
+    },
+    {
+      "item_id": "001",
+      "item_title": "White Shirt",
+      "price": "9$",
+      "quantity": 5
+    },
+    {
+      "item_id": "002",
+      "item_title": "Polo Shirt",
+      "price": "15$",
+      "quantity": 3
+    },
+    {
+      "item_id": "003",
+      "item_title": "Long Sleeve Shirt",
+      "price": "18$",
+      "quantity": 3
+    },
+    {
+      "item_id": "010",
+      "item_title": "Cargo Pants",
+      "price": "11$",
+      "quantity": 3
+    }
+  ]
+}

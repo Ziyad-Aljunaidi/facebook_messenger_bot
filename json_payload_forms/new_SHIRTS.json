@@ -5,7 +5,8 @@
         "payload": {
             "template_type": "generic",
             "elements": [{
-                "title": "Red Shirt",
+                "item_id": "000",
+                "item_title": "Red Shirt",
                 "subtitle": "10$",
                 "image_url": "/images/redshirt.png",
                 "buttons": [
@@ -16,7 +17,8 @@
                     }
                 ]
             },{
-                "title": "White Shirt",
+                "item_id": "001",
+                "item_title": "White Shirt",
                 "subtitle": "9$",
                 "image_url": "/images/whiteshirt.png",
                 "buttons": [
@@ -27,7 +29,8 @@
                     }
                 ]
             },{
-                "title": "Polo Shirt",
+                "item_id": "002",
+                "item_title": "Polo Shirt",
                 "subtitle": "15$",
                 "image_url": "/images/poloshirt.png",
                 "buttons": [
@@ -38,7 +41,8 @@
                     }
                 ]
             },{
-                "title": "Long Sleeve Shirt",
+                "item_id": "003",
+                "item_title": "Long Sleeve Shirt",
                 "subtitle": "18$",
                 "image_url": "/images/long_sleeve_shirt.png",
                 "buttons": [

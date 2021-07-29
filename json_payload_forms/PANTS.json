@@ -11,7 +11,7 @@
                      {
                          "type": "postback",
                          "title": "Add to cart",
-                         "payload": "ADD"
+                         "payload": "010"
                      }
                  ]
              },{
@@ -22,7 +22,7 @@
                      {
                          "type": "postback",
                          "title": "Add to cart",
-                         "payload": "ADD"
+                         "payload": "011"
                      }
                  ]
              },{
@@ -33,7 +33,7 @@
                      {
                          "type": "postback",
                          "title": "Add to cart",
-                         "payload": "ADD"
+                         "payload": "012"
                      }
                  ]
              },{
@@ -44,7 +44,7 @@
                      {
                          "type": "postback",
                          "title": "Add to cart",
-                         "payload": "ADD"
+                         "payload": "013"
                      }
                  ]
              },{
@@ -55,7 +55,7 @@
                      {
                          "type": "postback",
                          "title": "Add to cart",
-                         "payload": "ADD"
+                         "payload": "014"
                      }
                  ]
              }]

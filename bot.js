@@ -7,6 +7,7 @@ const
     express = require('express'),
     bodyparser = require('body-parser'),
     config = require("./config.js"),
+    cart = require("./cart_system"),
     app = express().use(bodyparser.json()); // Creates http server
 
 const  
@@ -82,27 +83,42 @@ function handleMessage(sender_psid, received_message) {
 }
 
 // Handles messaging_postback events
+
 function handlePostback(sender_psid, received_postback) {
     let response;
     let payload = received_postback.payload;
+    let new_shirts = config.new_shirts_payload.attachment.payload.elements;
+
     let paylod_list = {
-        "GET_STARTED": {"text": "Hello, how may I help you :)"},
+        "GET_STARTED": {"text": "Hello, how may I help you :)"}, 
         "DEMO": config.demo_payload,
         "SHIRTS": config.shirts_payload,
         "PANTS": config.pants_payload,
         "VIEW_CART": config.view_cart_payload,
         "yes": {"text": "Thanks!"},
-        "no": {"text": "Oops, try sending another image."}
+        "no": {"text": "Oops, try sending another image."},
+       // "000": config.add_to_cart(payload)
+        //"001": config.add_to_cart(payload),
+        //"002": cart_list.push(config.add_to_cart(payload))
     }
 
     // Get the payload for the postback
-    try{
-        response = paylod_list[payload];
-    }catch(err){
-        console.log(err)
-        response = {"text": "Sorry I couldn't understand that."}
+    if ( paylod_list[payload]){
+        response = paylod_list[payload]
+    }else{
+        try{
+            //cart.cart_method(sender_psid, payload)
+            //response = {"text": sender_psid+" "+ payload}
+            config.add_to_cart(sender_psid, payload)
+            console.log(payload)
+            response = {"text": "تم اضافة العنصر الي عربة التسوق"}
+        }
+    catch(err){
+            console.log(err)
+            response = {"text": "Sorry can't understand that"}
+        }
     }
-
+        
     callSendAPI(sender_psid, response);
 
 }
