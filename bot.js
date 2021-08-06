@@ -2,18 +2,29 @@
 
 // Import dependencie and set up http server
 require('dotenv').config();
+const { createConnection } = require('net');
 const request = require('request');
 const
     express = require('express'),
     bodyparser = require('body-parser'),
     config = require("./config.js"),
     cart = require("./cart_system"),
+    fs = require('fs'),
+    path = require("path"),
     app = express().use(bodyparser.json()); // Creates http server
 
 const  
     ngrok_url = process.env.DOMAIN,
     VERIFY_TOKEN = process.env.VERIFY_TOKEN,
     PAGE_ACCESS_TOKEN =  process.env.PAGE_ACCESS_TOKEN;
+
+
+const static_path = path.join(__dirname, "public");
+app.use(express.static(static_path));
+app.use(express.urlencoded({ extended: true }));
+
+let sender_psid_global;
+const jsonDataPath = "./cart_data/";
 
 // Setup Function For GET_STARTED Button
 function setupGetStartedButton(res) { 
@@ -88,6 +99,7 @@ function handlePostback(sender_psid, received_postback) {
     let response;
     let payload = received_postback.payload;
     let new_shirts = config.new_shirts_payload.attachment.payload.elements;
+    sender_psid_global = sender_psid;
 
     let paylod_list = {
         "GET_STARTED": {"text": "Hello, how may I help you :)"}, 
@@ -223,4 +235,38 @@ app.get('/setup', function(req,res) {
 });
 
 app.use("/images", express.static("./images"));
-app.use("/test",express.static('./public/fill_info.html'))
+app.use("/test",express.static('./public'))
+
+app.get("/meow", function(req, res, next) {
+    res.json(JSON.parse(fs.readFileSync("cart_data/"+sender_psid_global+"_cart.json")));
+    
+
+    let data = req.body;
+    //console.log(data);
+    
+});
+
+
+
+
+
+app.get("/test/pages/view_cart",(req, res) => {
+    let myObj;
+});
+
+app.post("/request", (req, res) => {
+    res.json([{
+       jsonFileName: req.body.final_object.sender_psid,
+       //designation_recieved: req.body.designation
+    }])
+    console.log(req.body.final_object.sender_psid)
+    fs.writeFile(jsonDataPath+req.body.final_object.sender_psid+".json", JSON.stringify(req.body.final_object, null, 2), err => {
+        if (err) {
+          console.error(err)
+          return;
+        }
+        //file written successfully
+        console.log("FILE CREATED SUCCESSFULLY"); 
+    });
+ })
+//

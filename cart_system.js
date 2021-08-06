@@ -35,6 +35,7 @@ function cart_method(sender_psid, item_object){
         }
 
         obj_form = obj_form = {
+            "sender_psid": sender_psid+"_cart",
             "items_object": list
         }
         fs.writeFile(jsonFilePath, JSON.stringify(obj_form, null, 2), err => {
