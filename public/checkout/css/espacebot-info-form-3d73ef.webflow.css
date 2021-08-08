@@ -1,0 +1,82 @@
+.submit-button {
+  position: static;
+  left: 0%;
+  top: 0%;
+  right: 0%;
+  bottom: 0%;
+  display: block;
+  width: 250px;
+  margin-left: 0px;
+  float: none;
+  clear: left;
+  -webkit-transform: translate(0px, 0px);
+  -ms-transform: translate(0px, 0px);
+  transform: translate(0px, 0px);
+  text-align: center;
+  -o-object-fit: fill;
+  object-fit: fill;
+}
+
+.form {
+  padding-right: 30px;
+  padding-left: 30px;
+}
+
+.body {
+  -o-object-fit: fill;
+  object-fit: fill;
+}
+
+.form-block {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+@media screen and (max-width: 479px) {
+  .submit-button {
+    position: static;
+    left: 0%;
+    top: auto;
+    right: auto;
+    bottom: 0%;
+    display: block;
+    width: 250px;
+    margin-top: 18px;
+    margin-right: 0px;
+    margin-left: 0px;
+    float: none;
+    clear: none;
+    -o-object-fit: fill;
+    object-fit: fill;
+  }
+
+  .form {
+    display: block;
+    padding-top: 10px;
+    padding-right: 0px;
+    padding-left: 0px;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+  }
+
+  .form-block {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    padding-right: 30px;
+    padding-left: 30px;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+  }
+}

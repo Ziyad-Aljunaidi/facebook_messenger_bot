@@ -23,7 +23,7 @@ const static_path = path.join(__dirname, "public");
 app.use(express.static(static_path));
 app.use(express.urlencoded({ extended: true }));
 
-let sender_psid_global;
+let sender_psid_global = "3870335286419004";
 const jsonDataPath = "./cart_data/";
 
 // Setup Function For GET_STARTED Button
@@ -235,7 +235,9 @@ app.get('/setup', function(req,res) {
 });
 
 app.use("/images", express.static("./images"));
-app.use("/test",express.static('./public'))
+app.use("/cart",express.static('./public/cart'))
+
+app.use("/cart/checkout", express.static('./public/checkout'))
 
 app.get("/meow", function(req, res, next) {
     res.json(JSON.parse(fs.readFileSync("cart_data/"+sender_psid_global+"_cart.json")));
@@ -255,14 +257,20 @@ app.get("/test/pages/view_cart",(req, res) => {
 });
 
 app.post("/request", (req, res) => {
-    res.json([{
-       jsonFileName: req.body.final_object.sender_psid,
-       //designation_recieved: req.body.designation
-    }])
+    try {
+        res.json([{
+            jsonFileName: req.body.final_object.sender_psid,
+         }]);
+        
+    } catch (error) {
+        console.log(error)
+    }
+
+
     console.log(req.body.final_object.sender_psid)
     fs.writeFile(jsonDataPath+req.body.final_object.sender_psid+".json", JSON.stringify(req.body.final_object, null, 2), err => {
         if (err) {
-          console.error(err)
+          console.error(err);
           return;
         }
         //file written successfully

@@ -10,8 +10,13 @@ function get_data(callback) {
       //data.responseJSON.items_object[0].quantity += 111
       console.log(data.responseJSON.items_object);
       console.log(data.responseJSON.sender_psid);
-      let items_list = data.responseJSON.items_object
-      sender_psid = data.responseJSON.sender_psid;
+      let items_list = data.responseJSON.items_object;
+      try{
+        sender_psid = data.responseJSON.sender_psid;
+      }catch{
+        sender_psid = "4170683683022267_cart"
+      }
+      
       //items_list[0].item_title = "meow meow";
 
       for(let i = 0; i < items_list.length; i++) {
@@ -128,12 +133,13 @@ $(document).ready(function () {
 function increment_btn(){
   $("li > a.button-6.w-button").click(function () {
     let li_index = $(this).parent().index();
-
+    let int_quantity = Number(ReceievdJson[li_index].quantity);
     // Li index natural numbers -> starts from 1
     let li_index_nn = li_index + 1;
+    
+    int_quantity += 1;
 
-    ReceievdJson[li_index].quantity += 1;
-
+    ReceievdJson[li_index].quantity = int_quantity;
     let h5_quantity_num = document.querySelector(`body > div > div.div-block-5 > ul > li:nth-child(${li_index_nn}) > p.heading-8`);
     h5_quantity_num.textContent = ReceievdJson[li_index].quantity;
     console.log(ReceievdJson[li_index].quantity,ReceievdJson[li_index].item_title);

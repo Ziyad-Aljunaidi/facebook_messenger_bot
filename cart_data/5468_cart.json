@@ -1,0 +1,22 @@
+{
+  "items_object": [
+    {
+      "item_id": "011",
+      "item_title": "Sweat Pants",
+      "price": "9$",
+      "quantity": 1
+    },
+    {
+      "item_id": "002",
+      "item_title": "Polo Shirt",
+      "price": "15$",
+      "quantity": 3
+    },
+    {
+      "item_id": "012",
+      "item_title": "Denim Jeans",
+      "price": "22$",
+      "quantity": 2
+    }
+  ]
+}
