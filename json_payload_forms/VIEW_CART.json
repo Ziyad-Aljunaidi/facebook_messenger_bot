@@ -12,10 +12,10 @@
             {
               "title": "View",
               "type": "web_url",
-              "url": "/test",
+              "url": "/cart",
               "messenger_extensions": true,
               "webview_height_ratio": "tall",
-              "fallback_url": "/test"
+              "fallback_url": "/cart"
             }
           ]
         }
