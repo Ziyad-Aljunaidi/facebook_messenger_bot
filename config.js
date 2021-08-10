@@ -79,7 +79,8 @@ function add_to_cart(sender_psid, payload){
                 "item_id": data_file[i].item_id,
                 "item_title":data_file[i].item_title,
                 "price": data_file[i].subtitle,
-                "quantity": 1
+                "quantity": 1,
+                "image": data_file[i].image_url
               }
               //response = {"text": JSON.stringify(item_object, null, 2)}
               console.log(item_object)

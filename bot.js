@@ -23,7 +23,7 @@ const static_path = path.join(__dirname, "public");
 app.use(express.static(static_path));
 app.use(express.urlencoded({ extended: true }));
 
-let sender_psid_global = "3870335286419004";
+let sender_psid_global = "4170683683022267";
 const jsonDataPath = "./cart_data/";
 
 // Setup Function For GET_STARTED Button
@@ -237,7 +237,7 @@ app.get('/setup', function(req,res) {
 app.use("/images", express.static("./images"));
 app.use("/cart",express.static('./public/cart'))
 
-app.use("/cart/checkout", express.static('./public/checkout'))
+app.use("/checkout", express.static('./public/checkout'))
 
 app.get("/meow", function(req, res, next) {
     res.json(JSON.parse(fs.readFileSync("cart_data/"+sender_psid_global+"_cart.json")));
