@@ -9,8 +9,10 @@ const
     bodyparser = require('body-parser'),
     config = require("./config.js"),
     cart = require("./cart_system"),
+    //cart_data = require("./cart_data"),
     fs = require('fs'),
     path = require("path"),
+    querystring = require('querystring'),
     app = express().use(bodyparser.json()); // Creates http server
 
 const  
@@ -18,12 +20,13 @@ const
     VERIFY_TOKEN = process.env.VERIFY_TOKEN,
     PAGE_ACCESS_TOKEN =  process.env.PAGE_ACCESS_TOKEN;
 
-
+ // /*
 const static_path = path.join(__dirname, "public");
 app.use(express.static(static_path));
 app.use(express.urlencoded({ extended: true }));
+ // */
+let sender_psid_global = "";
 
-let sender_psid_global = "4170683683022267";
 const jsonDataPath = "./cart_data/";
 
 // Setup Function For GET_STARTED Button
@@ -106,9 +109,10 @@ function handlePostback(sender_psid, received_postback) {
         "DEMO": config.demo_payload,
         "SHIRTS": config.shirts_payload,
         "PANTS": config.pants_payload,
-        "VIEW_CART": config.view_cart_payload,
+        "VIEW_CART": config.compose_cart_url(sender_psid),
         "yes": {"text": "Thanks!"},
         "no": {"text": "Oops, try sending another image."},
+        "ping":{"text": "test"},
        // "000": config.add_to_cart(payload)
         //"001": config.add_to_cart(payload),
         //"002": cart_list.push(config.add_to_cart(payload))
@@ -116,7 +120,9 @@ function handlePostback(sender_psid, received_postback) {
 
     // Get the payload for the postback
     if ( paylod_list[payload]){
-        response = paylod_list[payload]
+        sender_psid_global = sender_psid;
+        response = paylod_list[payload];
+
     }else{
         try{
             //cart.cart_method(sender_psid, payload)
@@ -234,26 +240,30 @@ app.get('/setup', function(req,res) {
     setupGetStartedButton(res);
 });
 
+app.get("/ga", function(req,res){
+    res.set('Content-Type', 'text/html')
+    res.send("C:/Users/ziyad/Desktop/bot_template/public/cart"+ "/index.html")
+});
+
 app.use("/images", express.static("./images"));
-app.use("/cart",express.static('./public/cart'))
+
+app.use(`/carta/`,express.static('./public/cart'));
+
 
 app.use("/checkout", express.static('./public/checkout'))
 
-app.get("/meow", function(req, res, next) {
-    res.json(JSON.parse(fs.readFileSync("cart_data/"+sender_psid_global+"_cart.json")));
+// let testingvar;
+app.get("/meow", async function(req, res, next) {
+
+    let cart_num = req.query.cart;
+    let cart_content = await JSON.parse(fs.readFileSync('./cart_data/'+cart_num+"_cart.json"));
+    console.log(cart_content)
     
-
-    let data = req.body;
-    //console.log(data);
-    
-});
-
-
-
-
-
-app.get("/test/pages/view_cart",(req, res) => {
-    let myObj;
+    try{
+        res.json(cart_content);
+    }catch(err){
+        console.log(err);
+    }  
 });
 
 app.post("/request", (req, res) => {

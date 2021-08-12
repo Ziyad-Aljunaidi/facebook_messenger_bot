@@ -26,6 +26,12 @@
                     "type": "postback",
                     "title": "View cart",
                     "payload": "VIEW_CART"
+                },
+                {
+                    "type": "web_url",
+                    "title": "Shop now",
+                    "url": "https://267c1d077707.ngrok.io/cart",
+                    "webview_height_ratio": "tall"
                 }
             ]
         }
@@ -34,10 +40,6 @@
         {
           "locale":"default",
           "text":"مرحبا {{user_first_name}}!"
-        },
-        {
-            "locale":"ar_AR",
-            "text":"مرحبا {{user_first_name}}!"
         }
     ]
 }

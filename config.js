@@ -1,5 +1,6 @@
 require('dotenv').config();
-const fs = require('fs')
+const fs = require('fs');
+const { send } = require('process');
 const cart_system = require('./cart_system.js')
 
 let server_domain = process.env.DOMAIN;
@@ -20,11 +21,30 @@ view_cart_payload.attachment.payload.elements[0].image_url = server_domain + url
 //console.log(JSON.stringify(view_cart_payload));
 //fs.writeFileSync("json_payload_forms/VIEW_CART.json",JSON.stringify(view_cart_payload, null, 2));
 
-url_file_loc = view_cart_payload.attachment.payload.elements[0].buttons[0].url;
-view_cart_payload.attachment.payload.elements[0].buttons[0].url = server_domain + url_file_loc;
 
-url_file_loc = view_cart_payload.attachment.payload.elements[0].buttons[0].fallback_url;
-view_cart_payload.attachment.payload.elements[0].buttons[0].fallback_url = server_domain + url_file_loc;
+//let sender_psid = "3870335286419004"
+
+function  compose_cart_url(sender_psid){
+   
+
+    url_file_loc = "/cart";
+    
+    let full_cart_url = server_domain + url_file_loc + "/?cart="+sender_psid 
+    view_cart_payload.attachment.payload.elements[0].buttons[0].url = full_cart_url;
+
+    url_file_loc = view_cart_payload.attachment.payload.elements[0].buttons[0].fallback_url;
+    view_cart_payload.attachment.payload.elements[0].buttons[0].fallback_url = full_cart_url;
+
+    return view_cart_payload
+
+    
+}
+ /*
+console.log(JSON.stringify(compose_cart_url(sender_psid), null, 2))
+console.log(JSON.stringify(compose_cart_url(sender_psid), null, 2))
+console.log(JSON.stringify(compose_cart_url(sender_psid), null, 2))
+*/
+//view_cart_payload.attachment.elements[0].buttons[0].payload
 
 array_elements = shirts_payload.attachment.payload.elements;
 
@@ -114,6 +134,7 @@ module.exports = {
     shirts_payload,
     new_shirts_payload,
     pants_payload,
-    add_to_cart
+    add_to_cart,
+    compose_cart_url
 
 };

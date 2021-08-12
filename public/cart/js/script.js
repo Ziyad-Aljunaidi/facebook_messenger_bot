@@ -1,10 +1,15 @@
 let ReceievdJson = 'meow';
 let sender_psid = "654654";
 let ReceievdJsonList = [];
+let current_url = window.location.href;
+let cart_num = current_url.split("/")[4]
+
+const urlParams = new URLSearchParams(window.location.search);
+const myParam = urlParams.get('cart');
 
 function get_data(callback) {
   $.ajax({
-    url: '/meow',
+    url: '/meow/?cart='+myParam,
 
     complete: function(data) {
       //data.responseJSON.items_object[0].quantity += 111
@@ -22,10 +27,6 @@ function get_data(callback) {
 
       for(let i = 0; i < items_list.length; i++) {
 
-        let img = document.createElement("img");
-        img.setAttribute('class', 'image-2');
-        img.setAttribute('loading', 'lazy');
-        img.setAttribute('src', 'images/greenshirt.png');
         let li = document.createElement("LI");
         li.setAttribute('class', 'list-item')
         let h5_title = document.createElement("p");
@@ -216,6 +217,14 @@ function total() {
 }
 
 
+function creeateCookie(cname, cvalue, exdays) {
+  const d = new Date();
+  d.setTime(d.getTime() + (exdays*24*60*60*1000));
+  let expires = "expires="+d.toUTCString();
+  document.cookie = cname + cname + "=" + cvalue + ";" + expires + ";path=/";
+  console.log(document.cookie)
+}
+
 get_data(function() {
 
 console.log('this is receievd ' + JSON.stringify(ReceievdJson))
@@ -224,6 +233,7 @@ decrement_btn();
 remove_btn();
 push_data();
 total();
+creeateCookie('ma', JSON.stringify(ReceievdJson, null, 2), 1 )
 //increment_quantity(get_li_pos);
 //get_li_pos();
 
@@ -232,4 +242,3 @@ total();
 
 
 // a desprate try for the add button.
-

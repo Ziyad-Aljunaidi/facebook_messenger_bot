@@ -10,12 +10,14 @@
           "image_url": "/images/redshirt.png",
           "buttons": [
             {
+              "payload": "id_check",
               "title": "View",
               "type": "web_url",
               "url": "/cart",
               "messenger_extensions": true,
               "webview_height_ratio": "tall",
               "fallback_url": "/cart"
+              
             }
           ]
         }
