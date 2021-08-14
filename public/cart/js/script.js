@@ -132,7 +132,8 @@ $(document).ready(function () {
         "item_id": "15963",
         "item_title": item_price,
         "price": item_price,
-        "quantity": item_quantity
+        "quantity": item_quantity,
+        "image": item_img
       }
     
     list.push(itemObject)
