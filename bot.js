@@ -291,12 +291,8 @@ app.post("/form_info", (req, res) => {
 
 // 404 PAGE NOT FOUND
 app.get('*', function(req, res){
-    try{
-        res.status(404).sendFile(static_path+"\\404NotFound.html");
-    }catch(err){
-        // console.log(err);
-        res.status(404).sendFile(static_path+"/404NotFound.html");
-    }
+    
+    res.status(404).sendFile(static_path+"/404NotFound.html");
     
   });
 
