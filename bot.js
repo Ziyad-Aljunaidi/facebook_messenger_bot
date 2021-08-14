@@ -23,7 +23,7 @@ const
  // /*
 const static_path = path.join(__dirname, "public");
 app.use(express.static(static_path));
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true}));
  // */
 let sender_psid_global = "";
 
@@ -130,15 +130,12 @@ function handlePostback(sender_psid, received_postback) {
             config.add_to_cart(sender_psid, payload)
             console.log(payload)
             response = {"text": "تم اضافة العنصر الي عربة التسوق"}
-        }
-    catch(err){
+        }catch(err){
             console.log(err)
             response = {"text": "Sorry can't understand that"}
         }
     }
-        
     callSendAPI(sender_psid, response);
-
 }
 
 // Sends response message via the Send API
@@ -211,7 +208,6 @@ app.post('/webhook', (req, res) => {
 app.get('/webhook', (req, res) => {
 
     // Your verify token. Should be a random string.
-    
 
     // Parse the query params
     let mode = req.query['hub.mode'];
@@ -234,26 +230,17 @@ app.get('/webhook', (req, res) => {
     }
 });
 
-
 // Creates The SETUP for our GET STARTED button
 app.get('/setup', function(req,res) {
     setupGetStartedButton(res);
 });
 
-app.get("/ga", function(req,res){
-    res.set('Content-Type', 'text/html')
-    res.send("C:/Users/ziyad/Desktop/bot_template/public/cart"+ "/index.html")
-});
-
 app.use("/images", express.static("./images"));
-
-app.use(`/carta/`,express.static('./public/cart'));
-
 
 app.use("/checkout", express.static('./public/checkout'))
 
 // let testingvar;
-app.get("/meow", async function(req, res, next) {
+app.get("/cart_items", async function(req, res, next) {
 
     let cart_num = req.query.cart;
     let cart_content = await JSON.parse(fs.readFileSync('./cart_data/'+cart_num+"_cart.json"));
@@ -267,17 +254,17 @@ app.get("/meow", async function(req, res, next) {
 });
 
 app.post("/request", (req, res) => {
+
     try {
         res.json([{
-            jsonFileName: req.body.final_object.sender_psid,
+            jsonFileName: req.body.final_object.sender_psid
          }]);
         
     } catch (error) {
-        console.log(error)
+        console.log(error);
     }
 
-
-    console.log(req.body.final_object.sender_psid)
+    console.log(req.body.final_object.sender_psid);
     fs.writeFile(jsonDataPath+req.body.final_object.sender_psid+".json", JSON.stringify(req.body.final_object, null, 2), err => {
         if (err) {
           console.error(err);
@@ -286,5 +273,24 @@ app.post("/request", (req, res) => {
         //file written successfully
         console.log("FILE CREATED SUCCESSFULLY"); 
     });
- })
-//
+});
+
+app.post("/form_info", (req, res) => {
+    try {
+        res.json([{
+            jsonFileName: req.body.data
+         }]);
+
+         console.log(req.body.data)
+        
+    } catch (error) {
+        console.log(error);
+    }
+})
+
+
+// 404 PAGE NOT FOUND
+app.get('*', function(req, res){
+    res.status(404).sendFile(static_path+"\\404NotFound.html");
+  });
+

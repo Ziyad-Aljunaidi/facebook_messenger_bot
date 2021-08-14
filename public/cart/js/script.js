@@ -9,88 +9,105 @@ const myParam = urlParams.get('cart');
 
 function get_data(callback) {
   $.ajax({
-    url: '/meow/?cart='+myParam,
+    url: '/cart_items/?cart='+myParam,
 
     complete: function(data) {
       //data.responseJSON.items_object[0].quantity += 111
       console.log(data.responseJSON.items_object);
       console.log(data.responseJSON.sender_psid);
       let items_list = data.responseJSON.items_object;
-      try{
-        sender_psid = data.responseJSON.sender_psid;
-      }catch (err){
-        console.log(err)
-        sender_psid = "4170683683022267_cart"
-      }
-      
+
+      sender_psid = data.responseJSON.sender_psid;
+ 
       //items_list[0].item_title = "meow meow";
+      
+      // JSON BUG 
+      try{
+        for(let i = 0; i < items_list.length; i++) {
+          let li = document.createElement("LI");
+          li.setAttribute('class', 'list-item')
+          let h5_title = document.createElement("p");
+          h5_title.setAttribute('class', 'paragraph');
+  
+          h5_title.innerHTML = items_list[i].item_title;
+  
+          let h5_price = document.createElement("p");
+          h5_price.setAttribute('class', 'paragraph-2');
+          h5_price.innerHTML = items_list[i].price + " جنيه";
+  
+          let h5_quantity = document.createElement("p");
+  
+          // h5_quantity.setAttribute('class', 'heading-7');
+          // h5_quantity.innerHTML = "Quantity:";
+          let item_img = document.createElement("img");
+          
+          item_img.setAttribute('class', 'image-2');
+          item_img.setAttribute('width', '80px');
+          item_img.setAttribute('height', '80px');
+          item_img.setAttribute('loading', 'lazy');
+          item_img.src = items_list[i].image;
+  
+          let h5_quantity_num = document.createElement("h5");
+          h5_quantity_num.setAttribute('class', 'heading-8');
+          h5_quantity_num.innerHTML = items_list[i].quantity;
+          
+          let dec_btn = document.createElement("a");
+          dec_btn.setAttribute('class', 'button-5 w-button');
+          dec_btn.innerHTML = "-";
+  
+          let inc_btn = document.createElement("a");
+          inc_btn.setAttribute('class', 'button-6 w-button');
+          inc_btn.innerHTML = "+";
+  
+  
+  
+          let remove_btn = document.createElement("a");
+          remove_btn.setAttribute('class', 'button-7 w-button');
+  
+          let gray_line = document.createElement("div");
+          gray_line.setAttribute('class', 'div-block-6');
+  
+          //let body_div = document.createElement("")
+          
+  
+          li.appendChild(item_img);
+          li.appendChild(h5_title);
+          li.appendChild(h5_price);
+          li.appendChild(h5_quantity);
+          li.appendChild(h5_quantity_num);
+          li.appendChild(dec_btn);
+          li.appendChild(inc_btn);
+          li.appendChild(remove_btn);
+          li.appendChild(gray_line);
+  
+          document.querySelector('ul').appendChild(li) 
+                  
+        }
+  
+        if(document.querySelectorAll('ul>li').length === 0) {
+          let emptyCart = document.querySelector("body > div.div-block-7");
+          emptyCart.setAttribute("style", "display:block")
+          
+          let hideCart = document.querySelector("body > div:nth-child(1)");
+          hideCart.setAttribute("style", "display:none")
+        }
 
-      for(let i = 0; i < items_list.length; i++) {
+        ReceievdJson = data.responseJSON.items_object;
 
-        let li = document.createElement("LI");
-        li.setAttribute('class', 'list-item')
-        let h5_title = document.createElement("p");
-        h5_title.setAttribute('class', 'paragraph');
+        for( let i = 0; i < ReceievdJson.length; i++){
+          ReceievdJsonList.push([i, ReceievdJson[i]]);
+        }
 
-        h5_title.innerHTML = items_list[i].item_title;
+      }catch(err){
+        console.log(err);
 
-        let h5_price = document.createElement("p");
-        h5_price.setAttribute('class', 'paragraph-2');
-        h5_price.innerHTML = items_list[i].price + " LE";
+        let emptyCart = document.querySelector("body > div.div-block-7");
+          emptyCart.setAttribute("style", "display:block")
+          
+        let hideCart = document.querySelector("body > div:nth-child(1)");
+        hideCart.setAttribute("style", "display:none")
+      }
 
-        let h5_quantity = document.createElement("p");
-
-        // h5_quantity.setAttribute('class', 'heading-7');
-        // h5_quantity.innerHTML = "Quantity:";
-        let item_img = document.createElement("img");
-        
-        item_img.setAttribute('class', 'image-2');
-        item_img.setAttribute('width', '80px');
-        item_img.setAttribute('height', '80px');
-        item_img.setAttribute('loading', 'lazy');
-        item_img.src = items_list[i].image;
-
-        let h5_quantity_num = document.createElement("h5");
-        h5_quantity_num.setAttribute('class', 'heading-8');
-        h5_quantity_num.innerHTML = items_list[i].quantity;
-        
-        let dec_btn = document.createElement("a");
-        dec_btn.setAttribute('class', 'button-5 w-button');
-        dec_btn.innerHTML = "-";
-
-        let inc_btn = document.createElement("a");
-        inc_btn.setAttribute('class', 'button-6 w-button');
-        inc_btn.innerHTML = "+";
-
-
-
-        let remove_btn = document.createElement("a");
-        remove_btn.setAttribute('class', 'button-7 w-button');
-
-        let gray_line = document.createElement("div");
-        gray_line.setAttribute('class', 'div-block-6');
-
-        //let body_div = document.createElement("")
-        
-
-        li.appendChild(item_img);
-        li.appendChild(h5_title);
-        li.appendChild(h5_price);
-        li.appendChild(h5_quantity);
-        li.appendChild(h5_quantity_num);
-        li.appendChild(dec_btn);
-        li.appendChild(inc_btn);
-        li.appendChild(remove_btn);
-        li.appendChild(gray_line);
-
-        document.querySelector('ul').appendChild(li) 
-              
-    }
-    ReceievdJson = data.responseJSON.items_object;
-    for( let i = 0; i < ReceievdJson.length; i++){
-      ReceievdJsonList.push([i, ReceievdJson[i]]);
-    }
-    
     callback();  
     //console.log(document.querySelector('ul').textContent)
   }   
@@ -122,11 +139,9 @@ $(document).ready(function () {
     console.log(list[i]);
   }
   
-  
-
- 
 
    $("#submit").click(function () {
+    
       
     let new_list = JSON.stringify(ReceievdJson, null, 2);
     
@@ -135,7 +150,7 @@ $(document).ready(function () {
       "items_object": ReceievdJson
     }
     
-    console.log(new_list)
+    console.log(final_object)
      $.post("/request",
         {
            final_object
@@ -148,6 +163,30 @@ $(document).ready(function () {
    });
  });
 }
+
+function update_cart() {
+
+  let final_object = {
+    "sender_psid": sender_psid,
+    "items_object": ReceievdJson
+  }
+
+  if(final_object.items_object.length === 0){
+    let emptyCart = document.querySelector("body > div.div-block-7");
+    emptyCart.setAttribute("style", "display:block")
+    
+    let hideCart = document.querySelector("body > div:nth-child(1)");
+    hideCart.setAttribute("style", "display:none")
+  }
+  $.post("/request",
+  {
+     final_object
+  },
+  function (data, status) {
+     console.log(data);
+  });
+}
+
 
 function increment_btn(){
   $("li > a.button-6.w-button").click(function () {
@@ -163,6 +202,7 @@ function increment_btn(){
     h5_quantity_num.textContent = ReceievdJson[li_index].quantity;
     console.log(ReceievdJson[li_index].quantity,ReceievdJson[li_index].item_title);
     total();
+    update_cart();
   });
 }
 
@@ -182,6 +222,7 @@ function decrement_btn() {
     h5_quantity_num.textContent = ReceievdJson[li_index].quantity;
     console.log(ReceievdJson[li_index].quantity,ReceievdJson[li_index].item_title);
     total();
+    update_cart();
   });
 }
 
@@ -198,6 +239,7 @@ function remove_btn() {
 
     $(`ul > li:nth-child(${li_index_nn})`).remove();
     total();
+    update_cart();
   });
 }
 
@@ -217,13 +259,7 @@ function total() {
 }
 
 
-function creeateCookie(cname, cvalue, exdays) {
-  const d = new Date();
-  d.setTime(d.getTime() + (exdays*24*60*60*1000));
-  let expires = "expires="+d.toUTCString();
-  document.cookie = cname + cname + "=" + cvalue + ";" + expires + ";path=/";
-  console.log(document.cookie)
-}
+
 
 get_data(function() {
 
@@ -233,7 +269,6 @@ decrement_btn();
 remove_btn();
 push_data();
 total();
-creeateCookie('ma', JSON.stringify(ReceievdJson, null, 2), 1 )
 //increment_quantity(get_li_pos);
 //get_li_pos();
 
@@ -242,3 +277,5 @@ creeateCookie('ma', JSON.stringify(ReceievdJson, null, 2), 1 )
 
 
 // a desprate try for the add button.
+
+
