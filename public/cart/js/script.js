@@ -18,6 +18,10 @@ function get_data(callback) {
       let items_list = data.responseJSON.items_object;
 
       sender_psid = data.responseJSON.sender_psid;
+
+      let sender_psid_checkout = "?cart_id="+sender_psid;
+      let submit_href = document.querySelector('#submit')
+      submit_href.setAttribute("href", "/checkout"+sender_psid_checkout)
  
       //items_list[0].item_title = "meow meow";
       
@@ -127,6 +131,7 @@ $(document).ready(function () {
     let item_title = document.querySelector(`li:nth-child(${i+1}) > p.paragraph`).textContent;
     let item_price = document.querySelector(`li:nth-child(${i+1}) > p.paragraph-2`).textContent;
     let item_quantity = document.querySelector(`li:nth-child(${i+1}) > h5.heading-8`).textContent;
+    let item_img = document.querySelector(`body > div:nth-child(1) > div.div-block-5 > ul > li:nth-child(${i+1}) > img`).src;
     let itemObject = 
       {
         "item_id": "15963",
@@ -145,6 +150,7 @@ $(document).ready(function () {
     
       
     let new_list = JSON.stringify(ReceievdJson, null, 2);
+
     
     let final_object = {
       "sender_psid": sender_psid,
@@ -246,16 +252,29 @@ function remove_btn() {
 
 
 function total() {
-  let total = 0;
+let total_cost = 0;
   
   for( let i = 0; i < ReceievdJson.length; i++) {
-    total += parseFloat(ReceievdJson[i].price)* parseFloat(ReceievdJson[i].quantity);
-    console.log(total);
+    total_cost += parseFloat(ReceievdJson[i].price)* parseFloat(ReceievdJson[i].quantity);
+    console.log(total_cost);
   }
 
   let total_val = document.querySelector('body > div > div:nth-child(2) > h4');
   total_val.setAttribute('class', 'heading-9');
-  total_val.textContent= "اجمالي المبلغ: "+ total + " LE";
+  total_val.textContent= "اجمالي المبلغ: "+ total_cost + " جنيه";
+
+  $.ajax({
+    url: '/shipping_cost',
+    type: 'POST',
+    data: {
+        "shipping_cost": "011",
+        "total": total_cost
+    },
+    success: function(msg) {
+        console.log ('total sent', total);
+    }               
+  });
+
   
 }
 

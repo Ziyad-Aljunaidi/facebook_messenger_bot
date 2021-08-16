@@ -280,13 +280,52 @@ app.post("/form_info", (req, res) => {
         res.json([{
             jsonFileName: req.body.data
          }]);
-
-         console.log(req.body.data)
+         let cart_id = req.body.data.sender_psid;
+         let costumer_info = req.body.data.costumer_info
+         // console.log(req.body.data)
+         let cart = JSON.parse(fs.readFileSync(jsonDataPath+cart_id+".json"));
+         let final_cart = {
+             "sender_psid": cart.sender_psid,
+             "items_object": cart.items_object,
+             costumer_info
+         }
+         
+         console.log(final_cart)
+         fs.writeFileSync(jsonDataPath+cart_id+".json", JSON.stringify(final_cart, null, 2), err => {
+             if(err) {
+                 console.log(err);
+             }
+         })
         
     } catch (error) {
         console.log(error);
     }
-})
+});
+
+let shipping_cost, total;
+app.post("/shipping_cost", (req, res) => {
+
+    total = req.body.total;
+    try {
+        res.json([{
+            jsonFileName: req.body.province
+         }]);
+        let shippng_cost_json = JSON.parse(fs.readFileSync('./shipping_costs.json'));
+        shipping_cost = shippng_cost_json[req.body.province];
+        total = req.body.total;
+        console.log(total+ " ka")
+       // total = req.body.total + shipping_cost;
+    } catch (error) {
+        console.log(error);
+    }
+});
+
+
+app.get("/shipping_cost", (req, res) => {
+    res.json({"shipping_cost": shipping_cost, "total": total});
+});
+
+
 
 
 // 404 PAGE NOT FOUND
