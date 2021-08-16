@@ -1,1 +1,32 @@
 
+{
+    "sender_psid": "3870335286419004_cart",
+    "items_object": [
+      {
+        "item_id": "001",
+        "item_title": "White Shirt",
+        "price": "9",
+        "quantity": "1",
+        "image": "/images/whiteshirt.png"
+      },
+      {
+        "item_id": "002",
+        "item_title": "Polo Shirt",
+        "price": "15 LE",
+        "quantity": "4",
+        "image": "/images/poloshirt.png"
+      }
+    ],
+  
+    "costumer_info": {
+      "name": "Ziyad Aljunaidi",
+      "email": "zadj9965@gmail.com",
+      "phone_number": "01113357439",
+      "country": "egypt",
+      "province": "Beheira",
+      "address": "7g/4, ST. Al-lasilki, Maadi, Cairo",
+      "shipping_cost": "13",
+      "total": "78",
+      "payment_method": "دفع عند الاستلام"
+    }
+  }
