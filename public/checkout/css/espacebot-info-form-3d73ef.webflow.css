@@ -225,6 +225,12 @@
   padding-right: 15px;
   text-align: right;
 }
+.text-block-11 {
+  margin-bottom: 20px;
+  padding-top: 10px;
+  padding-right: 15px;
+  text-align: right;
+}
 
 .button {
   width: 250px;
@@ -628,6 +634,13 @@
   }
 
   .text-block-10 {
+    margin-bottom: 20px;
+    padding-right: 15px;
+    font-weight: 500;
+    text-align: right;
+  }
+
+  .text-block-11 {
     margin-bottom: 20px;
     padding-right: 15px;
     font-weight: 500;

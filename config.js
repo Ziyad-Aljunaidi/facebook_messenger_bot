@@ -12,12 +12,65 @@ shirts_payload = JSON.parse(fs.readFileSync("json_payload_forms/SHIRTS.json"));
 new_shirts_payload = JSON.parse(fs.readFileSync("json_payload_forms/new_SHIRTS.json"));
 new_pants_payload = JSON.parse(fs.readFileSync("json_payload_forms/new_PANTS.json"));
 pants_payload = JSON.parse(fs.readFileSync("json_payload_forms/PANTS.json"));
+receipt_template = JSON.parse(fs.readFileSync("json_payload_forms/RECEIPT_TEMPLATE.json"));
 
 // VIEW_CART.json adding domain
 url_file_loc = view_cart_payload.attachment.payload.elements[0].image_url;
 view_cart_payload.attachment.payload.elements[0].image_url = server_domain + url_file_loc;
 
 // let sender_psid = "3870335286419004"
+
+function generate_receipt(order_num) {
+    let order_json = JSON.parse(fs.readFileSync("./orders/"+order_num+".json"));
+    //console.log(order_json.custom)
+    let timestamp_millis = Date.now();
+    let timestamp = Math.floor(timestamp_millis/1000);
+
+    
+    receipt_template.attachment.payload.recipient_name = order_json.customer_info.name;
+    receipt_template.attachment.payload.order_number = `${order_json.order_id}`;
+    receipt_template.attachment.payload.payment_method = order_json.customer_info.payment_method;
+    receipt_template.attachment.payload.timestamp = timestamp.toString();
+    receipt_template.attachment.payload.address.street_1 = order_json.customer_info.address;
+    receipt_template.attachment.payload.address.postal_code = order_json.customer_info.postal_code;
+    receipt_template.attachment.payload.address.city = order_json.customer_info.province;
+    receipt_template.attachment.payload.address.state = order_json.customer_info.province;
+    //receipt_template.attachment.payload.address.state = order_json.customer_info.province;
+    receipt_template.attachment.payload.address.country = "EG";
+
+    receipt_template.attachment.payload.summary.subtotal = parseFloat(order_json.customer_info.total) - parseFloat(order_json.customer_info.shipping_cost);
+    receipt_template.attachment.payload.summary.shipping_cost = parseFloat(order_json.customer_info.shipping_cost);
+    receipt_template.attachment.payload.summary.total_cost = parseFloat(order_json.customer_info.total);
+
+    //console.log(order_json.items_object[0].item_title)
+    
+    let all_elements = []
+    for (let i = 0; i < order_json.items_object.length; i++) {
+        let element_obj = {
+            "title": order_json.items_object[i].item_title,
+            "quantity": parseFloat(order_json.items_object[i].quantity),
+            "price" : parseFloat(order_json.items_object[i].price) ,
+            "currency": "EGP",
+            "image_url": server_domain + order_json.items_object[i].image
+        }
+        all_elements.push(element_obj)
+
+        
+        /*
+        receipt_template.attachment.payload.elements.title = order_json.items_object[i].item_title;
+        receipt_template.attachment.payload.elements.quantity = order_json.items_object[i].quantity;
+        receipt_template.attachment.payload.elements.price = order_json.items_object[i].price;
+        receipt_template.attachment.payload.elements.currency = order_json.items_object[i].currency;
+        receipt_template.attachment.payload.elements.image_url = order_json.items_object[i].image;
+        */
+    }
+
+    receipt_template.attachment.payload.elements =all_elements
+    
+
+    return receipt_template;
+    
+}
 
 function  compose_cart_url(sender_psid){
    
@@ -106,6 +159,8 @@ function add_to_cart(sender_psid, payload){
 }
 
 //add_to_cart("5468","012");
+
+//console.log(JSON.stringify(generate_receipt("158028497672443"), null, 2))
 module.exports = {
     get_started_payload,
     view_cart_payload,
@@ -114,6 +169,7 @@ module.exports = {
     new_shirts_payload,
     pants_payload,
     add_to_cart,
-    compose_cart_url
+    compose_cart_url,
+    generate_receipt
 
 };

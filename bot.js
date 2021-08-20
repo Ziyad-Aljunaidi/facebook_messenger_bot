@@ -9,6 +9,7 @@ const
     bodyparser = require('body-parser'),
     config = require("./config.js"),
     cart = require("./cart_system"),
+    order_generator = require("./order_id_generator"),
     //cart_data = require("./cart_data"),
     fs = require('fs'),
     path = require("path"),
@@ -101,7 +102,6 @@ function handleMessage(sender_psid, received_message) {
 function handlePostback(sender_psid, received_postback) {
     let response;
     let payload = received_postback.payload;
-    let new_shirts = config.new_shirts_payload.attachment.payload.elements;
     sender_psid_global = sender_psid;
 
     let paylod_list = {
@@ -113,6 +113,7 @@ function handlePostback(sender_psid, received_postback) {
         "yes": {"text": "Thanks!"},
         "no": {"text": "Oops, try sending another image."},
         "ping":{"text": "test"},
+        //"RECEIPT": received_postback.response
        // "000": config.add_to_cart(payload)
         //"001": config.add_to_cart(payload),
         //"002": cart_list.push(config.add_to_cart(payload))
@@ -122,6 +123,11 @@ function handlePostback(sender_psid, received_postback) {
     if ( paylod_list[payload]){
         sender_psid_global = sender_psid;
         response = paylod_list[payload];
+    
+    }else if ( payload === "RECEIPT"){
+        //console.log(received_postback.response)
+        response = received_postback.response
+
 
     }else{
         try{
@@ -243,14 +249,24 @@ app.use("/checkout", express.static('./public/checkout'))
 app.get("/cart_items", async function(req, res, next) {
 
     let cart_num = req.query.cart;
-    let cart_content = await JSON.parse(fs.readFileSync('./cart_data/'+cart_num+"_cart.json"));
-    console.log(cart_content)
-    
+    let cart_content;
     try{
-        res.json(cart_content);
+        cart_content = await JSON.parse(fs.readFileSync('./cart_data/'+cart_num+"_cart.json"));
+        console.log(cart_content)
+        try{
+            res.json(cart_content);
+        }catch(err){
+            console.log(err);
+        }
     }catch(err){
-        console.log(err);
-    }  
+        // console.log(err);
+        cart_content = JSON.parse(fs.readFileSync('./cart_data/cart_sample.json'));
+        try{
+            res.json(cart_content);
+        }catch(err){
+            console.log(err);
+        }
+    }
 });
 
 app.post("/request", (req, res) => {
@@ -281,13 +297,13 @@ app.post("/form_info", (req, res) => {
             jsonFileName: req.body.data
          }]);
          let cart_id = req.body.data.sender_psid;
-         let costumer_info = req.body.data.costumer_info
+         let customer_info = req.body.data.customer_info
          // console.log(req.body.data)
          let cart = JSON.parse(fs.readFileSync(jsonDataPath+cart_id+".json"));
          let final_cart = {
              "sender_psid": cart.sender_psid,
              "items_object": cart.items_object,
-             costumer_info
+             customer_info
          }
          
          console.log(final_cart)
@@ -296,7 +312,28 @@ app.post("/form_info", (req, res) => {
                  console.log(err);
              }
          })
-        
+
+         let reciept = order_generator.generateOrderID(final_cart);
+         let local_sender_psid = final_cart.sender_psid;
+         local_sender_psid = local_sender_psid.slice(0, -5)
+         console.log(JSON.stringify(reciept, null, 3))
+
+         let postpack = {
+             "payload" : "RECEIPT",
+             "response" : reciept,
+         }
+
+         handlePostback(local_sender_psid, postpack)
+         let current_cart = JSON.parse(fs.readFileSync(`./cart_data/${local_sender_psid}_cart.json`));
+         current_cart.items_object = [];
+         current_cart.customer_info = {};
+         
+         fs.writeFileSync(`./cart_data/${local_sender_psid}_cart.json`, JSON.stringify(current_cart, null, 2), err => {
+            if(err) {
+                console.log(err);
+            }
+        })
+
     } catch (error) {
         console.log(error);
     }

@@ -1,0 +1,32 @@
+{
+  "sender_psid": "4170683683022267_cart",
+  "items_object": [
+    {
+      "item_id": "003",
+      "item_title": "Long Sleeve Shirt",
+      "price": "18 LE",
+      "quantity": "1",
+      "image": "/images/long_sleeve_shirt.png"
+    },
+    {
+      "item_id": "000",
+      "item_title": "Red Shirt",
+      "price": "10 LE",
+      "quantity": "3",
+      "image": "/images/redshirt.png"
+    }
+  ],
+  "customer_info": {
+    "name": "Ziyad Aljunaidi",
+    "email": "zadj9965@gmail.com",
+    "phone_number": "01113357439",
+    "country": "egypt",
+    "province": "Alexandria",
+    "address": "7g/4, ST. Al-lasilki, Maadi, Cairo",
+    "postal_code": "11728",
+    "shipping_cost": "10",
+    "total": "58",
+    "payment_method": "دفع عند الاستلام"
+  },
+  "order_id": 3258899391954
+}
