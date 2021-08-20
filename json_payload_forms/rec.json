@@ -1,0 +1,56 @@
+{
+    "attachment":{
+        "type":"template",
+        "payload":{
+          "template_type":"receipt",
+          "recipient_name":"Ziyad Aljunaidi",
+          "order_number":"12421229689",
+          "currency":"USD",
+          "payment_method":"visa 1324",        
+          "order_url":"http://petersapparel.parseapp.com/order?order_id=123456",
+          "timestamp":"1428444852",         
+          "address":{
+            "street_1":"7g4, ST. Al-lasilki, Maadi, Cairo",
+            "street_2":"",
+            "city":"Maadi",
+            "postal_code":"11728",
+            "state":"Cairo",
+            "country":"EG"
+          },
+          "summary":{
+            "subtotal":75.00,
+            "shipping_cost":10,
+            "total_tax":6.19,
+            "total_cost":58
+          },
+          "adjustments":[
+            {
+              "name":"New Customer Discount",
+              "amount":20
+            },
+            {
+              "name":"$10 Off Coupon",
+              "amount":10
+            }
+          ],
+          "elements":[
+            {
+              "title": "Long Sleeve Shirt",
+              "subtitle": "made of shit",
+              "quantity": 1,
+              "price": 18,
+              "currency": "USD",
+              "image_url": "http://petersapparel.parseapp.com/images/long_sleeve_shirt.png"
+            },
+            {
+              "title": "Red Shirt",
+              "subtitle": "made of shit",
+              "quantity": 3,
+              "price": 10,
+              "currency": "USD",
+              "image_url": "http://petersapparel.parseapp.com/images/redshirt.png"
+            }
+          ]
+        }
+      }
+}
