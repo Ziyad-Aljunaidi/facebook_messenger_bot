@@ -20,10 +20,7 @@ function getFormData() {
     let province = document.getElementById('province').value;
     let postal_code = document.getElementById('postal_code').value;
     let address = document.getElementById('address').value;
-
-
-
-
+    
     $.ajax({
         url: '/shipping_cost',
         type: 'POST',
@@ -55,51 +52,11 @@ function getFormData() {
     }
     return customer_data
 }
-/*
-$('#complete_order').click(function(){
-    getFormData()
-    let conformation = document.querySelector('body > div > div.success-message.w-form-done')
-    conformation.setAttribute("style", "display:block")
-
-    let info_form = document.querySelector('#myform')
-    info_form.setAttribute("style", "display:none")
-
-    let approve = document.querySelector('body > div > div.success-message.w-form-done > div > div.div-block-3 ')
-    approve.setAttribute("style", "display:none")
-});
-*/
-
-/*
-$("#submit").click(function () {
-    let data = getFormData();
-    
-    $.ajax({
-        url: '/form_info',
-        type: 'POST',
-        data: {
-            data,
-        },
-        success: function(msg) {
-            //alert('Email Sent');
-        }               
-    });
 
 
-    //console.log(costumer_info)
-    //let err_msg = document.getElementById("err_msg").setAttribute("style", "display:block");
-
-
-  //et info_form = document.querySelector('#myform')
-  //nfo_form.setAttribute("style", "display:none")
-   
-  // return false;
-});
-*/
-
-
-$("#myform").submit(function(e) {
+$("#myform").submit( async function(e) {
     e.preventDefault(); 
-    getFormData();
+    await getFormData();
     console.log("haha")
 
 
@@ -159,7 +116,7 @@ $('#conform').click(function() {
             data,
         },
         success: function(msg) {
-            //alert('Email Sent');
+            // console.log(msg);
         }               
     });
 

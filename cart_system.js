@@ -14,6 +14,7 @@ let item_object =     {
 
 function cart_method(sender_psid, item_object){
     let obj_form = {
+        "sender_psid": sender_psid+"_cart",
         "items_object": [item_object]
     }
 

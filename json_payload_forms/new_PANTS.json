@@ -6,7 +6,7 @@
             "elements": [{
                 "item_id": "010",
                 "item_title": "Cargo Pants",
-                "subtitle": "11 LE",
+                "subtitle": "11 جنيه",
                 "image_url": "/images/cargo_pants.png",
                 "buttons": [
                     {
@@ -18,7 +18,7 @@
             },{
                 "item_id": "011",
                 "item_title": "Sweat Pants",
-                "subtitle": "9 LE",
+                "subtitle": "9 جنيه",
                 "image_url": "/images/sweatpants.png",
                 "buttons": [
                     {
@@ -30,7 +30,7 @@
             },{
                 "item_id": "012",
                 "item_title": "Denim Jeans",
-                "subtitle": "22 LE",
+                "subtitle": "22 جنيه",
                 "image_url": "/images/jeans_pants.png",
                 "buttons": [
                     {
@@ -42,7 +42,7 @@
             },{
                 "item_id": "013",
                 "item_title": "Cargo Short",
-                "subtitle": "12 LE",
+                "subtitle": "12 جنيه",
                 "image_url": "/images/cargo_short.png",
                 "buttons": [
                     {
@@ -54,7 +54,7 @@
             },{
                 "item_id": "014",
                 "item_title": "Denim Jeans Short",
-                "subtitle": "19.0 LE",
+                "subtitle": "19.0 جنيه",
                 "image_url": "/images/jeans_short.png",
                 "buttons": [
                     {

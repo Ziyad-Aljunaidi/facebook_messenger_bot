@@ -130,12 +130,12 @@ function add_to_cart(sender_psid, payload){
 
     if (type_code === "0"){
         type = "shirts";
-        item_info = shirts_payload.attachment.payload;
+        item_info = new_shirts_payload.attachment.payload;
         data_file = new_shirts_payload.attachment.payload.elements;
         
     }else if (type_code === "1"){
         type = "pants";
-        item_info = pants_payload.attachment.payload;
+        item_info = new_pants_payload.attachment.payload;
         data_file = new_pants_payload.attachment.payload.elements;
     }
     //console.log(JSON.stringify(data_file))

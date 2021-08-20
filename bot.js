@@ -10,7 +10,6 @@ const
     config = require("./config.js"),
     cart = require("./cart_system"),
     order_generator = require("./order_id_generator"),
-    //cart_data = require("./cart_data"),
     fs = require('fs'),
     path = require("path"),
     querystring = require('querystring'),
@@ -21,12 +20,10 @@ const
     VERIFY_TOKEN = process.env.VERIFY_TOKEN,
     PAGE_ACCESS_TOKEN =  process.env.PAGE_ACCESS_TOKEN;
 
- // /*
 const static_path = path.join(__dirname, "public");
+
 app.use(express.static(static_path));
 app.use(express.urlencoded({ extended: true}));
- // */
-let sender_psid_global = "";
 
 const jsonDataPath = "./cart_data/";
 
@@ -60,10 +57,8 @@ function handleMessage(sender_psid, received_message) {
     if(received_message.quick_reply){
         received_postback = received_message.quick_reply;
         handlePostback(sender_psid, received_postback);
-        
     }
     else if (received_message.attachments) {
-
         // Gets the URL of the message attachment
         let attachment_url = received_message.attachments[0].payload.url;
         response = {
@@ -98,11 +93,10 @@ function handleMessage(sender_psid, received_message) {
 }
 
 // Handles messaging_postback events
-
 function handlePostback(sender_psid, received_postback) {
     let response;
     let payload = received_postback.payload;
-    sender_psid_global = sender_psid;
+   // sender_psid_global = sender_psid;
 
     let paylod_list = {
         "GET_STARTED": {"text": "Hello, how may I help you :)"}, 
@@ -113,32 +107,24 @@ function handlePostback(sender_psid, received_postback) {
         "yes": {"text": "Thanks!"},
         "no": {"text": "Oops, try sending another image."},
         "ping":{"text": "test"},
-        //"RECEIPT": received_postback.response
-       // "000": config.add_to_cart(payload)
-        //"001": config.add_to_cart(payload),
-        //"002": cart_list.push(config.add_to_cart(payload))
     }
 
     // Get the payload for the postback
     if ( paylod_list[payload]){
-        sender_psid_global = sender_psid;
+       // sender_psid_global = sender_psid;
         response = paylod_list[payload];
     
     }else if ( payload === "RECEIPT"){
         //console.log(received_postback.response)
         response = received_postback.response
-
-
     }else{
         try{
-            //cart.cart_method(sender_psid, payload)
-            //response = {"text": sender_psid+" "+ payload}
             config.add_to_cart(sender_psid, payload)
             console.log(payload)
             response = {"text": "تم اضافة العنصر الي عربة التسوق"}
         }catch(err){
             console.log(err)
-            response = {"text": "Sorry can't understand that"}
+            response = {"text": "عذراً لم افهم ذالك"}
         }
     }
     callSendAPI(sender_psid, response);
@@ -214,7 +200,6 @@ app.post('/webhook', (req, res) => {
 app.get('/webhook', (req, res) => {
 
     // Your verify token. Should be a random string.
-
     // Parse the query params
     let mode = req.query['hub.mode'];
     let token = req.query['hub.verify_token'];
@@ -245,14 +230,13 @@ app.use("/images", express.static("./images"));
 
 app.use("/checkout", express.static('./public/checkout'))
 
-// let testingvar;
 app.get("/cart_items", async function(req, res, next) {
 
     let cart_num = req.query.cart;
     let cart_content;
     try{
         cart_content = await JSON.parse(fs.readFileSync('./cart_data/'+cart_num+"_cart.json"));
-        console.log(cart_content)
+        // console.log(cart_content)
         try{
             res.json(cart_content);
         }catch(err){
@@ -280,14 +264,14 @@ app.post("/request", (req, res) => {
         console.log(error);
     }
 
-    console.log(req.body.final_object.sender_psid);
+    // console.log(req.body.final_object.sender_psid);
     fs.writeFile(jsonDataPath+req.body.final_object.sender_psid+".json", JSON.stringify(req.body.final_object, null, 2), err => {
         if (err) {
           console.error(err);
           return;
         }
         //file written successfully
-        console.log("FILE CREATED SUCCESSFULLY"); 
+        console.log("FILE CREATED/UPDATED SUCCESSFULLY"); 
     });
 });
 
@@ -350,8 +334,7 @@ app.post("/shipping_cost", (req, res) => {
         let shippng_cost_json = JSON.parse(fs.readFileSync('./shipping_costs.json'));
         shipping_cost = shippng_cost_json[req.body.province];
         total = req.body.total;
-        console.log(total+ " ka")
-       // total = req.body.total + shipping_cost;
+        // console.log("total: ", total)
     } catch (error) {
         console.log(error);
     }
