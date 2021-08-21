@@ -3,6 +3,7 @@
 // Import dependencie and set up http server
 require('dotenv').config();
 const { createConnection } = require('net');
+const { send } = require('process');
 const request = require('request');
 const
     express = require('express'),
@@ -26,6 +27,57 @@ app.use(express.static(static_path));
 app.use(express.urlencoded({ extended: true}));
 
 const jsonDataPath = "./cart_data/";
+// Handover Protocol
+
+function handoverProtocol(sender_psid){
+      // Construct the message body
+      let request_body = {
+        "recipient": {
+            "id": sender_psid
+        },
+        "target_app_id": 263902037430900,
+        "metadata":"String to pass to secondary receiver app" 
+    }
+
+    // Send the HTTP request to the messenger Platform 
+    request({
+        "uri": "https://graph.facebook.com/v2.6/me/pass_thread_control",
+        "qs": {"access_token": PAGE_ACCESS_TOKEN},
+        "method": "POST",
+        "json": request_body
+    }, (err, res, body) => {
+        if (!err) {
+            console.log('Thread Passed')
+        } else {
+            console.error("Unable to pass the thread" + err);
+        }
+    });
+}
+
+
+// Take Controk API
+function takeControlApi(sender_psid){
+    let request_body = {
+        "recipient": {
+            "id": sender_psid
+        },
+        "metadata":"Pass this conversation to user. turn on the bot" 
+    }
+
+    // Send the HTTP request to the messenger Platform 
+    request({
+        "uri": "https://graph.facebook.com/v2.6/me/take_thread_control",
+        "qs": {"access_token": PAGE_ACCESS_TOKEN},
+        "method": "POST",
+        "json": request_body
+    }, (err, res, body) => {
+        if (!err) {
+            console.log('Thread Passed to Primary')
+        } else {
+            console.error("Unable to pass the thread" + err);
+        }
+    });
+}
 
 // Setup Function For GET_STARTED Button
 function setupGetStartedButton(res) { 
@@ -117,6 +169,10 @@ function handlePostback(sender_psid, received_postback) {
     }else if ( payload === "RECEIPT"){
         //console.log(received_postback.response)
         response = received_postback.response
+    }else if(payload === "AGENT") {
+        handoverProtocol(sender_psid);
+    }else if(payload === "PLANS") {
+        takeControlApi(sender_psid);
     }else{
         try{
             config.add_to_cart(sender_psid, payload)
@@ -168,6 +224,18 @@ app.post('/webhook', (req, res) => {
         // Iterates over each entry - there may be multiple if batched
         body.entry.forEach(function(entry) {
             
+            // check the incoming message, standby event.
+            if(entry.standby) {
+                let webhook_standby= entry.standby[0];
+
+                if(webhook_standby && webhook_standby.message) {
+                    if(webhook_standby.message.text === "back" || webhook_standby.message.text === "exit") {
+                        takeControlApi(webhook_standby.sender.id);
+                    }
+                }
+                return;
+            }
+
             // Gets the message. entry.messaging is an array, but
             // will only ever contain one message, so we get index 0
             let webhook_event = entry.messaging[0];

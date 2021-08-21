@@ -13,10 +13,6 @@ function get_data(callback) {
     complete: function(data) {
       let items_list = data.responseJSON.items_object;
       sender_psid = data.responseJSON.sender_psid;
-
- 
- 
-      
       // JSON BUG 
       try{
         for(let i = 0; i < items_list.length; i++) {
