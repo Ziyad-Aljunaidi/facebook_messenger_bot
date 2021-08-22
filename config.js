@@ -15,8 +15,8 @@ pants_payload = JSON.parse(fs.readFileSync("json_payload_forms/PANTS.json"));
 receipt_template = JSON.parse(fs.readFileSync("json_payload_forms/RECEIPT_TEMPLATE.json"));
 
 // VIEW_CART.json adding domain
-url_file_loc = view_cart_payload.attachment.payload.elements[0].image_url;
-view_cart_payload.attachment.payload.elements[0].image_url = server_domain + url_file_loc;
+// url_file_loc = view_cart_payload.attachment.payload.elements[0].image_url;
+// view_cart_payload.attachment.payload.elements[0].image_url = server_domain + url_file_loc;
 
 // let sender_psid = "3870335286419004"
 
@@ -77,10 +77,10 @@ function  compose_cart_url(sender_psid){
     url_file_loc = "/cart";
     
     let full_cart_url = server_domain + url_file_loc + "/?cart="+sender_psid 
-    view_cart_payload.attachment.payload.elements[0].buttons[0].url = full_cart_url;
+    view_cart_payload.attachment.payload.buttons[0].url = full_cart_url;
 
-    url_file_loc = view_cart_payload.attachment.payload.elements[0].buttons[0].fallback_url;
-    view_cart_payload.attachment.payload.elements[0].buttons[0].fallback_url = full_cart_url;
+    url_file_loc = view_cart_payload.attachment.payload.buttons[0].fallback_url;
+    view_cart_payload.attachment.payload.buttons[0].fallback_url = full_cart_url;
 
     return view_cart_payload
 

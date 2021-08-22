@@ -57,10 +57,8 @@ function getFormData() {
 $("#myform").submit( async function(e) {
     e.preventDefault(); 
     await getFormData();
-    console.log("haha")
 
-
-    $.ajax({
+    await $.ajax({
         url: '/shipping_cost',
         type:'GET',
     

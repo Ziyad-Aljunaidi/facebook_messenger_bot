@@ -2,24 +2,17 @@
   "attachment": {
     "type": "template",
     "payload": {
-      "template_type": "generic",
-      "elements": [
+      "template_type": "button",
+      "text": "هل تريد الذهاب الي عربة التسوق؟",
+      "buttons": [
         {
-          "title": "Classic T-Shirt Collection",
-          "subtitle": "See all our colors",
-          "image_url": "/images/redshirt.png",
-          "buttons": [
-            {
-              "payload": "id_check",
-              "title": "View",
-              "type": "web_url",
-              "url": "/cart",
-              "messenger_extensions": true,
-              "webview_height_ratio": "tall",
-              "fallback_url": "/cart"
-              
-            }
-          ]
+          "payload": "id_check",
+          "title": "عربة التسوق",
+          "type": "web_url",
+          "url": "/cart",
+          "messenger_extensions": true,
+          "webview_height_ratio": "tall",
+          "fallback_url": "/cart"
         }
       ]
     }

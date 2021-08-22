@@ -1,13 +1,13 @@
 {
-    "text": "here is an example for a simple clothes online shop, what would you like to shop for?",
+    "text": "دا نموذج لمحل بيع ملابس , تقدر تعمل اوردر وهمي من خيلاله\n تحب تتسوق في انهي؟",
     "quick_replies":[
         {
           "content_type":"text",
-          "title":"Shirts",
+          "title":"تشيرتات",
           "payload":"SHIRTS"
         },{
           "content_type":"text",
-          "title":"Pants",
+          "title":"بنطلونات",
           "payload":"PANTS"
         }
       ]

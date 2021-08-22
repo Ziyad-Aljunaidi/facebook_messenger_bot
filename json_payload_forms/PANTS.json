@@ -5,12 +5,12 @@
              "template_type": "generic",
              "elements": [{
                  "title": "Cargo Pants",
-                 "subtitle": "11$",
+                 "subtitle": "11 جنيه",
                  "image_url": "/images/cargo_pants.png",
                  "buttons": [
                      {
                          "type": "postback",
-                         "title": "Add to cart",
+                         "title": "اضف الى عربة التسوق",
                          "payload": "010"
                      }
                  ]
@@ -21,7 +21,7 @@
                  "buttons": [
                      {
                          "type": "postback",
-                         "title": "Add to cart",
+                         "title": "اضف الى عربة التسوق",
                          "payload": "011"
                      }
                  ]
@@ -32,7 +32,7 @@
                  "buttons": [
                      {
                          "type": "postback",
-                         "title": "Add to cart",
+                         "title": "اضف الى عربة التسوق",
                          "payload": "012"
                      }
                  ]
@@ -43,7 +43,7 @@
                  "buttons": [
                      {
                          "type": "postback",
-                         "title": "Add to cart",
+                         "title": "اضف الى عربة التسوق",
                          "payload": "013"
                      }
                  ]
@@ -54,7 +54,7 @@
                  "buttons": [
                      {
                          "type": "postback",
-                         "title": "Add to cart",
+                         "title": "اضف الى عربة التسوق",
                          "payload": "014"
                      }
                  ]

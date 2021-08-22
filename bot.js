@@ -77,6 +77,12 @@ function takeControlApi(sender_psid){
             console.error("Unable to pass the thread" + err);
         }
     });
+
+    let received_postback = {
+        "payload":  "ACTIVATE_BOT"
+    }
+
+    handlePostback(sender_psid, received_postback)
 }
 
 // Setup Function For GET_STARTED Button
@@ -150,38 +156,61 @@ function handlePostback(sender_psid, received_postback) {
     let payload = received_postback.payload;
    // sender_psid_global = sender_psid;
 
-    let paylod_list = {
-        "GET_STARTED": {"text": "Hello, how may I help you :)"}, 
-        "DEMO": config.demo_payload,
-        "SHIRTS": config.shirts_payload,
-        "PANTS": config.pants_payload,
-        "VIEW_CART": config.compose_cart_url(sender_psid),
-        "yes": {"text": "Thanks!"},
-        "no": {"text": "Oops, try sending another image."},
-        "ping":{"text": "test"},
-    }
+   switch(payload) {
 
-    // Get the payload for the postback
-    if ( paylod_list[payload]){
-       // sender_psid_global = sender_psid;
-        response = paylod_list[payload];
+    // Presistent Menu
+        case "DEMO":
+            response = config.demo_payload;
+            break;
+
+        case "PLANS":
+            takeControlApi(sender_psid);
+            break;
+
+        case "AGENT":
+            response = {"text": "تم ايقاف البوت لتوجيهك الي مندوب لاعادة التشغيل برجاء ارسال activate"}
+            handoverProtocol(sender_psid);
+            break;
+
+        case "VIEW_CART":
+            response = config.compose_cart_url(sender_psid);
+            break;
+
+    // DEMO Quick Replies
+        case "SHIRTS":
+            response =  config.shirts_payload;
+            break;
+            
+       case "PANTS":
+            response = config.pants_payload;
+            break;
     
-    }else if ( payload === "RECEIPT"){
-        //console.log(received_postback.response)
-        response = received_postback.response
-    }else if(payload === "AGENT") {
-        handoverProtocol(sender_psid);
-    }else if(payload === "PLANS") {
-        takeControlApi(sender_psid);
-    }else{
-        try{
-            config.add_to_cart(sender_psid, payload)
-            console.log(payload)
+    // Generate a receipt
+        case "RECEIPT":
+            response = received_postback.response
+            break;
+
+    // To Re-Activate The Bot takeControlApi
+        case "ACTIVATE_BOT":
+            response = {"text": "تم اعادة تشغيل البوت"};
+            break;
+        /*
+        // Add to cart case
+        case "000":
+            //config.add_to_cart(sender_psid, payload)
+            //console.log(payload)
             response = {"text": "تم اضافة العنصر الي عربة التسوق"}
-        }catch(err){
-            console.log(err)
-            response = {"text": "عذراً لم افهم ذالك"}
-        }
+        */
+
+        default:
+            try{
+                config.add_to_cart(sender_psid, payload)
+                console.log(payload)
+                response = {"text": "تم اضافة العنصر الي عربة التسوق"}
+            }catch(err){
+                console.log(err)
+                response = {"text": "عذراً لم افهم ذالك"}
+            }
     }
     callSendAPI(sender_psid, response);
 }
@@ -229,7 +258,9 @@ app.post('/webhook', (req, res) => {
                 let webhook_standby= entry.standby[0];
 
                 if(webhook_standby && webhook_standby.message) {
-                    if(webhook_standby.message.text === "back" || webhook_standby.message.text === "exit") {
+                    let activate_word = webhook_standby.message.text
+                    activate_word.toLowerCase();
+                    if( activate_word === "activate" || webhook_standby.message.text === "back" || webhook_standby.message.text === "exit") {
                         takeControlApi(webhook_standby.sender.id);
                     }
                 }

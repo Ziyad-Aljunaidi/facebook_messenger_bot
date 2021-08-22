@@ -34,6 +34,7 @@ function get_data(callback) {
           item_img.setAttribute('width', '80px');
           item_img.setAttribute('height', '80px');
           item_img.setAttribute('loading', 'lazy');
+          item_img.setAttribute("style", "object-fit:cover");
           item_img.src = items_list[i].image;
   
           let h5_quantity_num = document.createElement("h5");
@@ -178,16 +179,19 @@ function increment_btn(){
   $("li > a.button-6.w-button").click(function () {
     let li_index = $(this).parent().index();
     let int_quantity = Number(ReceievdJson[li_index].quantity);
-    // Li index natural numbers -> starts from 1
-    let li_index_nn = li_index + 1;
-    int_quantity += 1;
+    if(int_quantity < 10){
+      // Li index natural numbers -> starts from 1
+      let li_index_nn = li_index + 1;
+      int_quantity += 1;
 
-    ReceievdJson[li_index].quantity = int_quantity;
-    let h5_quantity_num = document.querySelector(`body > div > div.div-block-5 > ul > li:nth-child(${li_index_nn}) > h5.heading-8`);
-    h5_quantity_num.textContent = ReceievdJson[li_index].quantity;
-    console.log(ReceievdJson[li_index].quantity,ReceievdJson[li_index].item_title);
-    total();
-    update_cart();
+      ReceievdJson[li_index].quantity = int_quantity;
+      let h5_quantity_num = document.querySelector(`body > div > div.div-block-5 > ul > li:nth-child(${li_index_nn}) > h5.heading-8`);
+      h5_quantity_num.textContent = ReceievdJson[li_index].quantity;
+      console.log(ReceievdJson[li_index].quantity,ReceievdJson[li_index].item_title);
+      total();
+      update_cart();
+    }
+
   });
 }
 
