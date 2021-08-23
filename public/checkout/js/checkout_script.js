@@ -3,6 +3,7 @@ const urlParams = new URLSearchParams(window.location.search);
 const myParam = urlParams.get('cart_id');
 
 let total;
+
 $.ajax({
     url: '/shipping_cost',
     type: 'GET',
@@ -11,7 +12,7 @@ $.ajax({
     }              
 });
 
-function getFormData() {
+async function getFormData() {
 
     let name = document.getElementById('name').value;
     let email = document.getElementById('email').value;
@@ -54,35 +55,39 @@ function getFormData() {
 }
 
 
-$("#myform").submit( async function(e) {
+
+$("#myform").submit(function(e) {
     e.preventDefault(); 
-    await getFormData();
-
-    await $.ajax({
-        url: '/shipping_cost',
-        type:'GET',
-    
-        complete: function(data) {
-            console.log(data.responseJSON.shipping_cost);
-            console.log(data.responseJSON.total);
-
-            customer_data.customer_info.shipping_cost = data.responseJSON.shipping_cost;
-            let total = parseFloat(customer_data.customer_info.total) + parseFloat(data.responseJSON.shipping_cost);
-            customer_data.customer_info.total = total;
-            let name = document.querySelector('body > div > div.success-message.w-form-done > div > div.div-block-4 > div.text-block-3')
-            name.innerHTML = customer_data.customer_info.name;
+    getFormData().then(
+        function fill_customer(){
+            $.ajax({
+                url: '/shipping_cost',
+                type:'GET',
+            
+                complete: function(data) {
+                    console.log(data.responseJSON.shipping_cost);
+                    console.log(data.responseJSON.total);
         
-            document.querySelector('body > div > div.success-message.w-form-done > div > div.div-block-4 > div.text-block-4').innerHTML = customer_data.customer_info.email
-            document.querySelector('body > div > div.success-message.w-form-done > div > div.div-block-4 > div.text-block-5').innerHTML = customer_data.customer_info.phone_number
-            document.querySelector('body > div > div.success-message.w-form-done > div > div.div-block-4 > div.text-block-6').innerHTML = customer_data.customer_info.country
-            document.querySelector('body > div > div.success-message.w-form-done > div > div.div-block-4 > div.text-block-7').innerHTML = customer_data.customer_info.province
-            document.querySelector('body > div > div.success-message.w-form-done > div > div.div-block-4 > div.text-block-8').innerHTML = customer_data.customer_info.address
-            document.querySelector('body > div > div.success-message.w-form-done > div > div.div-block-4 > div.text-block-11').innerHTML = customer_data.customer_info.postal_code;
-            document.querySelector('body > div > div.success-message.w-form-done > div > div.div-block-4 > div.text-block-9').innerHTML = "تكلفة الشحن "+ customer_data.customer_info.shipping_cost +" جنيه "
-            document.querySelector('body > div > div.success-message.w-form-done > div > div.div-block-4 > div.text-block-10').innerHTML = customer_data.customer_info.payment_method;
-            document.querySelector('body > div > div.success-message.w-form-done > div > div.div-block-4 > div.div-block-5 > h4').innerHTML = `الاجمالي: ${total} جنيه`
-        } 
-    });
+                    customer_data.customer_info.shipping_cost = data.responseJSON.shipping_cost;
+                    let total = parseFloat(customer_data.customer_info.total) + parseFloat(data.responseJSON.shipping_cost);
+                    customer_data.customer_info.total = total;
+                    let name = document.querySelector('body > div > div.success-message.w-form-done > div > div.div-block-4 > div.text-block-3')
+                    name.innerHTML = customer_data.customer_info.name;
+                
+                    document.querySelector('body > div > div.success-message.w-form-done > div > div.div-block-4 > div.text-block-4').innerHTML = customer_data.customer_info.email
+                    document.querySelector('body > div > div.success-message.w-form-done > div > div.div-block-4 > div.text-block-5').innerHTML = customer_data.customer_info.phone_number
+                    document.querySelector('body > div > div.success-message.w-form-done > div > div.div-block-4 > div.text-block-6').innerHTML = customer_data.customer_info.country
+                    document.querySelector('body > div > div.success-message.w-form-done > div > div.div-block-4 > div.text-block-7').innerHTML = customer_data.customer_info.province
+                    document.querySelector('body > div > div.success-message.w-form-done > div > div.div-block-4 > div.text-block-8').innerHTML = customer_data.customer_info.address
+                    document.querySelector('body > div > div.success-message.w-form-done > div > div.div-block-4 > div.text-block-11').innerHTML = customer_data.customer_info.postal_code;
+                    document.querySelector('body > div > div.success-message.w-form-done > div > div.div-block-4 > div.text-block-9').innerHTML = "تكلفة الشحن "+ customer_data.customer_info.shipping_cost +" جنيه "
+                    document.querySelector('body > div > div.success-message.w-form-done > div > div.div-block-4 > div.text-block-10').innerHTML = customer_data.customer_info.payment_method;
+                    document.querySelector('body > div > div.success-message.w-form-done > div > div.div-block-4 > div.div-block-5 > h4').innerHTML = `الاجمالي: ${total} جنيه`
+                } 
+            });
+        }
+    );
+
 
     let conformation = document.querySelector('body > div > div.success-message.w-form-done')
     conformation.setAttribute("style", "display:block")

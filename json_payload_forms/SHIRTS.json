@@ -6,7 +6,7 @@
             "template_type": "generic",
             "elements": [{
                 "title": "Red Shirt",
-                "subtitle": "10 جنيه",
+                "subtitle": "10 EGP",
                 "image_url": "/images/redshirt.png",
                 "buttons": [
                     {
@@ -17,7 +17,7 @@
                 ]
             },{
                 "title": "White Shirt",
-                "subtitle": "9$",
+                "subtitle": "9 EGP",
                 "image_url": "/images/whiteshirt.png",
                 "buttons": [
                     {
@@ -28,7 +28,7 @@
                 ]
             },{
                 "title": "Polo Shirt",
-                "subtitle": "15$",
+                "subtitle": "15 EGP",
                 "image_url": "/images/poloshirt.png",
                 "buttons": [
                     {
@@ -39,7 +39,7 @@
                 ]
             },{
                 "title": "Long Sleeve Shirt",
-                "subtitle": "18$",
+                "subtitle": "18 EGP",
                 "image_url": "/images/long_sleeve_shirt.png",
                 "buttons": [
                     {

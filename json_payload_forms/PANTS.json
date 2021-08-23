@@ -5,7 +5,7 @@
              "template_type": "generic",
              "elements": [{
                  "title": "Cargo Pants",
-                 "subtitle": "11 جنيه",
+                 "subtitle": "11 EGP",
                  "image_url": "/images/cargo_pants.png",
                  "buttons": [
                      {
@@ -16,7 +16,7 @@
                  ]
              },{
                  "title": "Sweat Pants",
-                 "subtitle": "9$",
+                 "subtitle": "9 EGP",
                  "image_url": "/images/sweatpants.png",
                  "buttons": [
                      {
@@ -27,7 +27,7 @@
                  ]
              },{
                  "title": "Denim Jeans",
-                 "subtitle": "22$",
+                 "subtitle": "22 EGP",
                  "image_url": "/images/jeans_pants.png",
                  "buttons": [
                      {
@@ -38,7 +38,7 @@
                  ]
              },{
                  "title": "Cargo Short",
-                 "subtitle": "12$",
+                 "subtitle": "12 EGP",
                  "image_url": "/images/cargo_short.png",
                  "buttons": [
                      {
@@ -49,7 +49,7 @@
                  ]
              },{
                  "title": "Denim Jeans Short",
-                 "subtitle": "19$",
+                 "subtitle": "19 EGP",
                  "image_url": "/images/jeans_short.png",
                  "buttons": [
                      {

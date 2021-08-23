@@ -164,7 +164,8 @@ function handlePostback(sender_psid, received_postback) {
             break;
 
         case "PLANS":
-            takeControlApi(sender_psid);
+            //takeControlApi(sender_psid);
+            response = {"text": "برجاء التحدث مع احد مندوبينا لمناقشة الاسعار وكيفية الاشتراك."}
             break;
 
         case "AGENT":
