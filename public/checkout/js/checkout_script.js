@@ -97,7 +97,7 @@ $("#myform").submit(function(e) {
             console.log(data.responseJSON.total);
         
             customer_data.customer_info.shipping_cost = data.responseJSON.shipping_cost;
-            let total_final = parseFloat(customer_data.customer_info.total) + parseFloat(data.responseJSON.shipping_cost);
+            let total = parseFloat(customer_data.customer_info.total) + parseFloat(data.responseJSON.shipping_cost);
             customer_data.customer_info.total = total;
             let name = document.querySelector('body > div > div.success-message.w-form-done > div > div.div-block-4 > div.text-block-3')
             name.innerHTML = customer_data.customer_info.name;
@@ -110,7 +110,7 @@ $("#myform").submit(function(e) {
             document.querySelector('body > div > div.success-message.w-form-done > div > div.div-block-4 > div.text-block-11').innerHTML = customer_data.customer_info.postal_code;
             document.querySelector('body > div > div.success-message.w-form-done > div > div.div-block-4 > div.text-block-9').innerHTML = "تكلفة الشحن "+ customer_data.customer_info.shipping_cost +" جنيه "
             document.querySelector('body > div > div.success-message.w-form-done > div > div.div-block-4 > div.text-block-10').innerHTML = customer_data.customer_info.payment_method;
-            document.querySelector('body > div > div.success-message.w-form-done > div > div.div-block-4 > div.div-block-5 > h4').innerHTML = `الاجمالي: ${total_final} جنيه`
+            document.querySelector('body > div > div.success-message.w-form-done > div > div.div-block-4 > div.div-block-5 > h4').innerHTML = `الاجمالي: ${total} جنيه`
         } 
     });
 
