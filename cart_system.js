@@ -28,7 +28,7 @@ function cart_method(sender_psid, item_object){
         for(let i=0; i< list.length; i++){
             if (list[i].item_id === item_object.item_id){
                 found = true;
-                parseFloat(list[i].quantity) += 1
+                list[i].quantity = parseInt(list[i].quantity) + 1
                 break;
             }
         } 
