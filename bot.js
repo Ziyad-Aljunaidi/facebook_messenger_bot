@@ -145,6 +145,9 @@ function handleMessage(sender_psid, received_message) {
             }
         }
     }
+    else if(received_message.message) {
+        response = {"text": "عذرا لما افهم هذا"}
+    }
 
     // Sends the response message
     callSendAPI(sender_psid, response);
