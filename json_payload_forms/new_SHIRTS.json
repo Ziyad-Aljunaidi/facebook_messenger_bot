@@ -12,7 +12,7 @@
                 "buttons": [
                     {
                         "type": "postback",
-                        "title": "Add to cart",
+                        "title": "اضف الى عربة التسوق",
                         "payload": "000"
                     }
                 ]
@@ -24,7 +24,7 @@
                 "buttons": [
                     {
                         "type": "postback",
-                        "title": "Add to cart",
+                        "title": "اضف الى عربة التسوق",
                         "payload": "001"
                     }
                 ]
@@ -36,7 +36,7 @@
                 "buttons": [
                     {
                         "type": "postback",
-                        "title": "Add to cart",
+                        "title": "اضف الى عربة التسوق",
                         "payload": "002"
                     }
                 ]
@@ -48,7 +48,7 @@
                 "buttons": [
                     {
                         "type": "postback",
-                        "title": "Add to cart",
+                        "title": "اضف الى عربة التسوق",
                         "payload": "003"
                     }
                 ]
