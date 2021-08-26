@@ -145,7 +145,7 @@ function handleMessage(sender_psid, received_message) {
             }
         }
     }
-    else if(received_message.message) {
+    else if(received_message.text) {
         response = {"text": "عذرا لما افهم هذا"}
     }
 
