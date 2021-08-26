@@ -25,9 +25,8 @@
       <input type="email" class="text-field-3 w-input" maxlength="256" name="email" data-name="Email" placeholder="" id="email" required="">
       <label class="field-label-4">رقم الهاتف</label>
       <input type="tel" class="text-field-4 w-input" maxlength="256" name="field" data-name="Field" pattern="^01[0125][0-9]{8}$" id="phone_number" required="">
-      <label class="field-label-5">العنوان</label><select id="country" name="field-2" required="" class="select-field w-select">
+      <label class="field-label-5">العنوان</label><select id="country" name="field-2" required="" class="select-field w-select" disabled>
         <option value="egypt">مصر</option>
-        <option value="tunisia">تونس</option>
       </select>
       <select id="province" name="field-3" required="" class="select-field-2 w-select">
         <option value="Alexandria">الاسكندرية</option>
@@ -35,7 +34,7 @@
         <option value="Aswan">أسوان</option>
         <option value="Beheira">البحيرة</option>
         <option value="Beni Suef">بنى سويف</option>
-        <option value="Cairo">القاهرة</option>
+        <option value="Cairo" selected="selected">القاهرة</option>
         <option value="Dakahlia">دقهلية</option>
         <option value="Damietta">دمياط</option>
         <option value="Faiyum">فيوم</option>
@@ -58,7 +57,7 @@
         <option value=" Suez">سويس</option>
       </select>
       <input type="text" class="text-field w-input" maxlength="256" name="field-4" data-name="Field 5" pattern="^[0-9]{5}$" placeholder="الرمز البريدي" id="postal_code" required="">
-      <input type="text" class="text-field w-input" maxlength="256" name="field-4" data-name="Field 4" placeholder="العنوان بالتفاصيل" id="address" required="">
+      <input type="text" class="text-field-address w-input" maxlength="256" name="field-4" data-name="Field 4" placeholder="العنوان بالتفاصيل" id="address" required="">
       <div class="div-block">
         <label class="field-label-7">طريقة الدفع</label>
         <label class="w-radio">
@@ -66,7 +65,7 @@
           <span class="w-form-label">الدفع عند الإستلام</span>
         </label>
           <label class="w-radio">
-            <input type="radio" data-name="Radio" id="radio-2" name="radio" value="credit/debit" required="" class="w-form-formradioinput radio-button-2 w-radio-input">
+            <input type="radio" data-name="Radio" id="radio-2" name="radio" value="credit/debit" required="" class="w-form-formradioinput radio-button-2 w-radio-input" disabled>
             <span class="w-form-label">Credit/Debit card</span>
           </label>
           </div><input type="submit" value="اتمام الطلب" data-wait="Please wait..." class="submit-button w-button">

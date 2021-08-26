@@ -1,0 +1,21 @@
+{
+    "attachment": {
+      "type": "template",
+      "payload": {
+        "template_type": "button",
+        "text": "تحب تستفسر عن ايه؟",
+        "buttons": [
+          {
+            "type": "postback",
+            "title": "الاسعار",
+            "payload": "PRICING"
+          },
+          {
+            "type": "postback",
+            "title": "كيفية الاشتراك",
+            "payload": "MORE_INFO"
+          }
+        ]
+      }
+    }
+  }

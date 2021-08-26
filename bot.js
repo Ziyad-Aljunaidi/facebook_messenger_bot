@@ -152,7 +152,7 @@ function handleMessage(sender_psid, received_message) {
 
 // Handles messaging_postback events
 function handlePostback(sender_psid, received_postback) {
-    let response;
+    let response = [];
     let payload = received_postback.payload;
    // sender_psid_global = sender_psid;
 
@@ -165,12 +165,14 @@ function handlePostback(sender_psid, received_postback) {
 
         case "PLANS":
             //takeControlApi(sender_psid);
-            response = {"text": "برجاء التحدث مع احد مندوبينا لمناقشة الاسعار وكيفية الاشتراك."}
+            //response = {"text": "برجاء التحدث مع احد مندوبينا لمناقشة الاسعار وكيفية الاشتراك."}
+            response = config.plansPricing;
             break;
-
+            
         case "AGENT":
-            response = {"text": "تم ايقاف البوت لتوجيهك الي مندوب لاعادة التشغيل برجاء ارسال activate"}
+            response = {"text": "تم ايقاف البوت, من فضلك ارسل استفسارك وسيتم الرد عليك من قبل احد مندوبينا في اسرع وقت ممكن 😊\nلاعادة تشغيل البوت برجاء ارسال كلمة activate"}
             handoverProtocol(sender_psid);
+
             break;
 
         case "VIEW_CART":
@@ -182,7 +184,7 @@ function handlePostback(sender_psid, received_postback) {
             response =  config.shirts_payload;
             break;
             
-       case "PANTS":
+        case "PANTS":
             response = config.pants_payload;
             break;
     
@@ -202,6 +204,17 @@ function handlePostback(sender_psid, received_postback) {
             //console.log(payload)
             response = {"text": "تم اضافة العنصر الي عربة التسوق"}
         */
+       case "PLANSPRICNING":
+           response = config.plansPricing;
+           break;
+
+       case "PRICING":
+           response = config.pricing;
+           break;
+
+        case "MORE_INFO":
+            response = {"text": "برجاء التواصل مع احد مندوبينا او الاتصال علي 01030533078 للاستعلام عن كيفية الاشتراك و المتطلبات لبناء البوت الخاص بك 😊"};
+            break;
 
         default:
             try{
@@ -213,7 +226,7 @@ function handlePostback(sender_psid, received_postback) {
                 response = {"text": "عذراً لم افهم ذالك"}
             }
     }
-    callSendAPI(sender_psid, response);
+    callSendAPI(sender_psid, response)
 }
 
 // Sends response message via the Send API
@@ -260,7 +273,7 @@ app.post('/webhook', (req, res) => {
 
                 if(webhook_standby && webhook_standby.message) {
                     let activate_word = webhook_standby.message.text
-                    activate_word.toLowerCase();
+                    activate_word = activate_word.toLowerCase();
                     if( activate_word === "activate" || webhook_standby.message.text === "back" || webhook_standby.message.text === "exit") {
                         takeControlApi(webhook_standby.sender.id);
                     }

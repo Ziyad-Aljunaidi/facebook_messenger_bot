@@ -39,7 +39,7 @@ function get_data(callback) {
   
           let h5_quantity_num = document.createElement("h5");
           h5_quantity_num.setAttribute('class', 'heading-8');
-          h5_quantity_num.innerHTML = items_list[i].quantity;
+          h5_quantity_num.innerHTML = parseFloat(items_list[i].quantity);
           
           let dec_btn = document.createElement("a");
           dec_btn.setAttribute('class', 'button-5 w-button');

@@ -1,0 +1,39 @@
+{
+    "attachment": {
+        "type": "template",
+        "payload": {
+            "template_type": "generic",
+            "elements": [{
+                "title": "باقة 180 ",
+                "subtitle": "بتكلفة 180 جنيه/شهر أو 1,800 سنويا ,بيبقي ليك لحد 1000 مستخدم للبوت علي صفحتك",
+                "buttons": [
+                    {
+                        "type": "postback",
+                        "title": "معرفة المزيد",
+                        "payload": "MORE_INFO" 
+                    }
+                ]
+            },{
+                "title": "باقة 360 ",
+                "subtitle": "بتكلفة 360 جنيه/شهر أو 3,960 سنويا ,بيبقي ليك لحد 3000 مستخدم للبوت علي صفحتك",
+                "buttons": [
+                    {
+                        "type": "postback",
+                        "title": "معرفة المزيد",
+                        "payload": "MORE_INFO" 
+                    }
+                ]
+            },{
+                "title": "باقة 760 ",
+                "subtitle": "بتكلفة 760 جنيه/شهر أو 7,920 سنويا ,بيبقي ليك لحد 8000 مستخدم للبوت علي صفحتك",
+                "buttons": [
+                    {
+                        "type": "postback",
+                        "title": "معرفة المزيد",
+                        "payload": "MORE_INFO" 
+                    }
+                ]
+            }]
+        }
+    }
+}

@@ -103,6 +103,9 @@
 .text-field {
   border-radius: 10px;
 }
+.text-field-address {
+  border-radius: 10px;
+}
 
 .text-field-2 {
   border-radius: 10px;
@@ -404,7 +407,12 @@
   }
 
   .text-field {
-    height: 80px;
+    height: 40px;
+    border-radius: 10px;
+  }
+
+  .text-field-address {
+    height: 70px;
     border-radius: 10px;
   }
 
