@@ -9,10 +9,13 @@ get_started_payload = JSON.parse(fs.readFileSync("json_payload_forms/GET_STARTED
 view_cart_payload = JSON.parse(fs.readFileSync("json_payload_forms/VIEW_CART.json"));
 demo_payload = JSON.parse(fs.readFileSync("json_payload_forms/DEMO.json"));
 shirts_payload = JSON.parse(fs.readFileSync("json_payload_forms/SHIRTS.json"));
-new_shirts_payload = JSON.parse(fs.readFileSync("json_payload_forms/new_SHIRTS.json"));
-new_pants_payload = JSON.parse(fs.readFileSync("json_payload_forms/new_PANTS.json"));
+// new_shirts_payload = JSON.parse(fs.readFileSync("json_payload_forms/new_SHIRTS.json"));
+// new_pants_payload = JSON.parse(fs.readFileSync("json_payload_forms/new_PANTS.json"));
 pants_payload = JSON.parse(fs.readFileSync("json_payload_forms/PANTS.json"));
 receipt_template = JSON.parse(fs.readFileSync("json_payload_forms/RECEIPT_TEMPLATE.json"));
+plansPricing = JSON.parse(fs.readFileSync("json_payload_forms/PLANSPRICING.json"));
+pricing = JSON.parse(fs.readFileSync("json_payload_forms/PRICING.json"));
+
 
 // VIEW_CART.json adding domain
 // url_file_loc = view_cart_payload.attachment.payload.elements[0].image_url;
@@ -166,8 +169,10 @@ module.exports = {
     view_cart_payload,
     demo_payload,
     shirts_payload,
-    new_shirts_payload,
+    //new_shirts_payload,
     pants_payload,
+    plansPricing,
+    pricing,
     add_to_cart,
     compose_cart_url,
     generate_receipt
