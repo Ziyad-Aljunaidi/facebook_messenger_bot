@@ -219,11 +219,28 @@ function handlePostback(sender_psid, received_postback) {
             response = {"text": "برجاء التواصل مع احد مندوبينا او الاتصال علي 01030533078 للاستعلام عن كيفية الاشتراك و المتطلبات لبناء البوت الخاص بك 😊"};
             break;
 
+        case "SHOP_MORE":
+            response = {
+                "text": "تحب تتسوق في ايه؟",
+                "quick_replies":[
+                    {
+                      "content_type":"text",
+                      "title":"تشيرتات",
+                      "payload":"SHIRTS"
+                    },{
+                      "content_type":"text",
+                      "title":"بنطلونات",
+                      "payload":"PANTS"
+                    }
+                ]
+            }
+            break;
+
         default:
             try{
                 config.add_to_cart(sender_psid, payload)
                 console.log(payload)
-                response = {"text": "تم اضافة العنصر الي عربة التسوق"}
+                response = config.shop_more
             }catch(err){
                 console.log(err)
                 response = {"text": "عذراً لم افهم ذالك"}

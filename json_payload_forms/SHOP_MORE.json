@@ -1,0 +1,14 @@
+{
+    "text": "تم اضافة العنصر الي عربة التسوق\n تحب تكمل تسوق؟",
+    "quick_replies":[
+        {
+          "content_type":"text",
+          "title":"أكمل تسوق",
+          "payload":"SHOP_MORE"
+        },{
+          "content_type":"text",
+          "title": "🛒 عربة التسوق",
+          "payload":"VIEW_CART"
+        }
+      ]
+}

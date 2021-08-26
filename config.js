@@ -15,6 +15,7 @@ pants_payload = JSON.parse(fs.readFileSync("json_payload_forms/PANTS.json"));
 receipt_template = JSON.parse(fs.readFileSync("json_payload_forms/RECEIPT_TEMPLATE.json"));
 plansPricing = JSON.parse(fs.readFileSync("json_payload_forms/PLANSPRICING.json"));
 pricing = JSON.parse(fs.readFileSync("json_payload_forms/PRICING.json"));
+shop_more = JSON.parse(fs.readFileSync("json_payload_forms/SHOP_MORE.json"));
 
 
 // VIEW_CART.json adding domain
@@ -173,6 +174,7 @@ module.exports = {
     pants_payload,
     plansPricing,
     pricing,
+    shop_more,
     add_to_cart,
     compose_cart_url,
     generate_receipt
