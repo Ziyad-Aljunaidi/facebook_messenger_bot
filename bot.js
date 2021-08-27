@@ -146,7 +146,7 @@ function handleMessage(sender_psid, received_message) {
         }
     }
     else if(received_message.text) {
-        response = {"text": "عذرا لما افهم هذا"}
+        response = {"text": "يمكنك التحدث الي مندوب ,عذرا لما افهم هذا"}
     }
 
     // Sends the response message
@@ -162,22 +162,26 @@ function handlePostback(sender_psid, received_postback) {
    switch(payload) {
 
     // Presistent Menu
+        case "custom_question_0":
         case "DEMO":
             response = config.demo_payload;
             break;
 
+        case "custom_question_1":
         case "PLANS":
             //takeControlApi(sender_psid);
             //response = {"text": "برجاء التحدث مع احد مندوبينا لمناقشة الاسعار وكيفية الاشتراك."}
             response = config.plansPricing;
             break;
-            
+
+        case "custom_question_2": 
         case "AGENT":
             response = {"text": "تم ايقاف البوت, من فضلك ارسل استفسارك وسيتم الرد عليك من قبل احد مندوبينا في اسرع وقت ممكن 😊\nلاعادة تشغيل البوت برجاء ارسال كلمة activate"}
             handoverProtocol(sender_psid);
 
             break;
 
+        case "custom_question_3":
         case "VIEW_CART":
             response = config.compose_cart_url(sender_psid);
             break;

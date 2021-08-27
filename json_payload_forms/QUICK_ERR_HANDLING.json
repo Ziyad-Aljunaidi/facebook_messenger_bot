@@ -1,0 +1,10 @@
+{
+    "text": "عذرا لم افهم هذا, يمكنك التحدث الي مندوب",
+    "quick_replies":[
+        {
+          "content_type":"text",
+          "title":"التحدث الي مندوب ؟",
+          "payload":"AGENT"
+        }
+      ]
+}
