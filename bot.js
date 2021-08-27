@@ -146,7 +146,7 @@ function handleMessage(sender_psid, received_message) {
         }
     }
     else if(received_message.text) {
-        response = {"text": "يمكنك التحدث الي مندوب ,عذرا لما افهم هذا"}
+        response = config.quick_err_handling;
     }
 
     // Sends the response message
