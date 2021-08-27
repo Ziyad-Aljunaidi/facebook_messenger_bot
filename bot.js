@@ -272,11 +272,16 @@ app.post('/webhook', (req, res) => {
                 let webhook_standby= entry.standby[0];
 
                 if(webhook_standby && webhook_standby.message) {
-                    let activate_word = webhook_standby.message.text
-                    activate_word = activate_word.toLowerCase();
-                    if( activate_word === "activate" || webhook_standby.message.text === "back" || webhook_standby.message.text === "exit") {
-                        takeControlApi(webhook_standby.sender.id);
+                    try{
+                        let activate_word = webhook_standby.message.text
+                        activate_word = activate_word.toLowerCase();
+                        if( activate_word === "activate" || webhook_standby.message.text === "back" || webhook_standby.message.text === "exit") {
+                            takeControlApi(webhook_standby.sender.id);
+                        }
+                    }catch(err){
+                        console.log(err)
                     }
+
                 }
                 return;
             }
