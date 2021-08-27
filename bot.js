@@ -247,7 +247,7 @@ function handlePostback(sender_psid, received_postback) {
                 response = config.shop_more
             }catch(err){
                 console.log(err)
-                response = {"text": "عذراً لم افهم ذالك"}
+                response = config.quick_err_handling;
             }
     }
     callSendAPI(sender_psid, response)

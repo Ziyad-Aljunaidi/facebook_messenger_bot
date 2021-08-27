@@ -176,6 +176,7 @@ module.exports = {
     plansPricing,
     pricing,
     shop_more,
+    quick_err_handling,
     add_to_cart,
     compose_cart_url,
     generate_receipt
