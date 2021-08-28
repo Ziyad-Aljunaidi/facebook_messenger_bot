@@ -46,7 +46,7 @@ function getFormData() {
     let phone_number = document.getElementById('phone_number').value;
     let country = document.getElementById('country').value;
     let province = document.getElementById('province').value;
-    let postal_code = document.getElementById('postal_code').value;
+    // let postal_code = document.getElementById('postal_code').value;
     let address = document.getElementById('address').value;
 
     $.ajax({
@@ -72,7 +72,7 @@ function getFormData() {
             "country": country,
             "province": province,
             "address": address,
-            "postal_code": postal_code,
+           // "postal_code": postal_code,
             "shipping_cost": "",
             "total": total,
             "payment_method": payment_method
@@ -107,7 +107,7 @@ $("#myform").submit(function(e) {
             document.querySelector('body > div > div.success-message.w-form-done > div > div.div-block-4 > div.text-block-6').innerHTML = customer_data.customer_info.country
             document.querySelector('body > div > div.success-message.w-form-done > div > div.div-block-4 > div.text-block-7').innerHTML = customer_data.customer_info.province
             document.querySelector('body > div > div.success-message.w-form-done > div > div.div-block-4 > div.text-block-8').innerHTML = customer_data.customer_info.address
-            document.querySelector('body > div > div.success-message.w-form-done > div > div.div-block-4 > div.text-block-11').innerHTML = customer_data.customer_info.postal_code;
+           // document.querySelector('body > div > div.success-message.w-form-done > div > div.div-block-4 > div.text-block-11').innerHTML = customer_data.customer_info.postal_code;
             document.querySelector('body > div > div.success-message.w-form-done > div > div.div-block-4 > div.text-block-9').innerHTML = "تكلفة الشحن "+ customer_data.customer_info.shipping_cost +" جنيه "
             document.querySelector('body > div > div.success-message.w-form-done > div > div.div-block-4 > div.text-block-10').innerHTML = customer_data.customer_info.payment_method;
             document.querySelector('body > div > div.success-message.w-form-done > div > div.div-block-4 > div.div-block-5 > h4').innerHTML = `الاجمالي: ${total} جنيه`

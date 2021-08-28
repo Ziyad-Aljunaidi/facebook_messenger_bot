@@ -38,8 +38,8 @@ function generate_receipt(order_num) {
     receipt_template.attachment.payload.payment_method = order_json.customer_info.payment_method;
     receipt_template.attachment.payload.timestamp = timestamp.toString();
     receipt_template.attachment.payload.address.street_1 = order_json.customer_info.address;
-    receipt_template.attachment.payload.address.postal_code = order_json.customer_info.postal_code;
-    receipt_template.attachment.payload.address.city = order_json.customer_info.province;
+    //receipt_template.attachment.payload.address.postal_code = order_json.customer_info.postal_code;
+    //receipt_template.attachment.payload.address.city = order_json.customer_info.province;
     receipt_template.attachment.payload.address.state = order_json.customer_info.province;
     //receipt_template.attachment.payload.address.state = order_json.customer_info.province;
     receipt_template.attachment.payload.address.country = "EG";

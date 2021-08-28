@@ -11,10 +11,10 @@
         "address":{
           "street_1":"1 Hacker Way",
           "street_2":"",
-          "city":"Menlo Park",
-          "postal_code":"",
-          "state":"CA",
-          "country":"US"
+          "city":".",
+          "postal_code":".",
+          "state":".",
+          "country":"."
         },
         "summary":{
         },
