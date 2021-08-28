@@ -7,7 +7,7 @@
             "elements": [{
                 "item_id": "000",
                 "item_title": "Red Shirt",
-                "subtitle": "10 جنيه",
+                "subtitle": "100 جنيه",
                 "image_url": "/images/redshirt.png",
                 "buttons": [
                     {
@@ -19,7 +19,7 @@
             },{
                 "item_id": "001",
                 "item_title": "White Shirt",
-                "subtitle": "9 جنيه",
+                "subtitle": "90 جنيه",
                 "image_url": "/images/whiteshirt.png",
                 "buttons": [
                     {
@@ -31,7 +31,7 @@
             },{
                 "item_id": "002",
                 "item_title": "Polo Shirt",
-                "subtitle": "15 جنيه",
+                "subtitle": "150 جنيه",
                 "image_url": "/images/poloshirt.png",
                 "buttons": [
                     {
@@ -43,7 +43,7 @@
             },{
                 "item_id": "003",
                 "item_title": "Long Sleeve Shirt",
-                "subtitle": "18 جنيه",
+                "subtitle": "180 جنيه",
                 "image_url": "/images/long_sleeve_shirt.png",
                 "buttons": [
                     {
