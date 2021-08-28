@@ -211,7 +211,7 @@ async function handlePostback(sender_psid, received_postback) {
            break;
 
        case "PRICING": 
-           let response0 = {"text": "في 500 جنيه تدفع مرة واحدة فقط لبرمجة البوت و تهيئته لاحتياجات صفحتك, والدفع بيتم بعد استلام البوت واختباره عل صفحتك حتى تكون راضي عنه تماما."}
+           let response0 = {"text": "في 500 جنيه تدفع مرة واحدة فقط لبرمجة البوت و تهيئته لاحتياجات صفحتك, والدفع بيتم بعد استلام البوت واختباره على صفحتك حتى تكون راضي عنه تماما."}
            response = config.pricing;
            callSendAPI(sender_psid, response);
            callSendAPI(sender_psid, response0);
