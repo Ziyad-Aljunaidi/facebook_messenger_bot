@@ -130,8 +130,10 @@ function handleMessage(sender_psid, received_message) {
 }
 
 // Handles messaging_postback events
-function handlePostback(sender_psid, received_postback) {
+
+async function handlePostback(sender_psid, received_postback) {
     let response = [];
+    
     let payload = received_postback.payload;
    // sender_psid_global = sender_psid;
 
@@ -141,6 +143,7 @@ function handlePostback(sender_psid, received_postback) {
         case "custom_question_0":
         case "DEMO":
             response = config.demo_payload;
+            callSendAPI(sender_psid, response)
             break;
 
         case "custom_question_1":
@@ -148,55 +151,75 @@ function handlePostback(sender_psid, received_postback) {
             //takeControlApi(sender_psid);
             //response = {"text": "برجاء التحدث مع احد مندوبينا لمناقشة الاسعار وكيفية الاشتراك."}
             response = config.plansPricing;
+            callSendAPI(sender_psid, response)
             break;
 
         case "custom_question_2": 
         case "AGENT":
-            response = {"text": "تم ايقاف البوت, من فضلك ارسل استفسارك وسيتم الرد عليك من قبل احد مندوبينا في اسرع وقت ممكن 😊\nلاعادة تشغيل البوت برجاء ارسال كلمة activate"}
+            response = config.stp_bot;
+            //{"text": "تم ايقاف البوت, من فضلك ارسل استفسارك وسيتم الرد عليك من قبل احد مندوبينا في اسرع وقت ممكن 😊\nلاعادة تشغيل البوت برجاء ارسال كلمة activate",}
+            callSendAPI(sender_psid, response);
+            
             handoverProtocol(sender_psid);
-
+            /*
+            setTimeout(() => {
+                if(reactivate == false){
+                    takeControlApi(sender_psid);
+                }
+                
+            }, 6000) // 300000 = 5 min
+            */
+           
             break;
 
         case "custom_question_3":
         case "VIEW_CART":
             response = config.compose_cart_url(sender_psid);
+            callSendAPI(sender_psid, response)
             break;
 
     // DEMO Quick Replies
         case "SHIRTS":
             response =  config.shirts_payload;
+            callSendAPI(sender_psid, response)
             break;
             
         case "PANTS":
             response = config.pants_payload;
+            callSendAPI(sender_psid, response)
             break;
     
     // Generate a receipt
         case "RECEIPT":
-            response = received_postback.response
+            response = received_postback.response;
+            callSendAPI(sender_psid, response)
             break;
 
     // To Re-Activate The Bot takeControlApi
         case "ACTIVATE_BOT":
-            response = {"text": "تم اعادة تشغيل البوت"};
+             response = {"text": "تم اعادة تشغيل البوت"};
+             callSendAPI(sender_psid, response);
+             break;
+
+        case "REACTIVATE_BOT":
+            takeControlApi(sender_psid);
             break;
-        /*
-        // Add to cart case
-        case "000":
-            //config.add_to_cart(sender_psid, payload)
-            //console.log(payload)
-            response = {"text": "تم اضافة العنصر الي عربة التسوق"}
-        */
+
        case "PLANSPRICNING":
            response = config.plansPricing;
+           callSendAPI(sender_psid, response)
            break;
 
-       case "PRICING":
+       case "PRICING": 
+           let response0 = {"text": "في 500 جنيه تدفع مرة واحدة فقط لبرمجة البوت و تهيئته لاحتياجات صفحتك, والدفع بيتم بعد استلام البوت واختباره عل صفحتك حتى تكون راضي عنه تماما."}
            response = config.pricing;
+           callSendAPI(sender_psid, response);
+           callSendAPI(sender_psid, response0);
            break;
 
         case "MORE_INFO":
             response = {"text": "برجاء التواصل مع احد مندوبينا او الاتصال علي 01030533078 للاستعلام عن كيفية الاشتراك و المتطلبات لبناء البوت الخاص بك 😊"};
+            callSendAPI(sender_psid, response)
             break;
 
         case "SHOP_MORE":
@@ -214,6 +237,7 @@ function handlePostback(sender_psid, received_postback) {
                     }
                 ]
             }
+            callSendAPI(sender_psid, response)
             break;
 
         default:
@@ -221,12 +245,14 @@ function handlePostback(sender_psid, received_postback) {
                 config.add_to_cart(sender_psid, payload)
                 console.log(payload)
                 response = config.shop_more
+                callSendAPI(sender_psid, response)
             }catch(err){
                 console.log(err)
                 response = config.quick_err_handling;
+                callSendAPI(sender_psid, response)
             }
     }
-    callSendAPI(sender_psid, response)
+    // callSendAPI(sender_psid, response)
 }
 
 // Sends response message via the Send API
@@ -275,7 +301,7 @@ app.post('/webhook', (req, res) => {
                     try{
                         let activate_word = webhook_standby.message.text
                         activate_word = activate_word.toLowerCase();
-                        if( activate_word === "activate" || webhook_standby.message.text === "back" || webhook_standby.message.text === "exit") {
+                        if( activate_word === "activate" || webhook_standby.message.text === "back" || webhook_standby.message.text === "exit" || webhook_standby.message.text === "اعادة تشغيل البوت") {
                             takeControlApi(webhook_standby.sender.id);
                         }
                     }catch(err){

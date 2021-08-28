@@ -17,6 +17,7 @@ plansPricing = JSON.parse(fs.readFileSync("json_payload_forms/PLANSPRICING.json"
 pricing = JSON.parse(fs.readFileSync("json_payload_forms/PRICING.json"));
 shop_more = JSON.parse(fs.readFileSync("json_payload_forms/SHOP_MORE.json"));
 quick_err_handling = JSON.parse(fs.readFileSync("json_payload_forms/QUICK_ERR_HANDLING.json"));
+stp_bot = JSON.parse(fs.readFileSync("json_payload_forms/STP_BOT.json"));
 
 
 // VIEW_CART.json adding domain
@@ -177,6 +178,7 @@ module.exports = {
     pricing,
     shop_more,
     quick_err_handling,
+    stp_bot,
     add_to_cart,
     compose_cart_url,
     generate_receipt

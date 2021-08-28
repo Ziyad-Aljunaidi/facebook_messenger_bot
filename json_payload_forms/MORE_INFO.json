@@ -1,0 +1,14 @@
+{
+    "text": "دا نموذج لمحل بيع ملابس , تقدر تعمل اوردر وهمي منه لتجربة البوت\n تحب تتسوق في ايه؟",
+    "quick_replies":[
+        {
+          "content_type":"text",
+          "title":"أكمل تسوق",
+          "payload":"SHOP"
+        },{
+          "content_type":"text",
+          "title":"الذهاب الي عربة التسوق",
+          "payload":"VIEW_CART"
+        }
+      ]
+}
