@@ -122,7 +122,13 @@ function handleMessage(sender_psid, received_message) {
         response = {"text": ""}
     }
     else if(received_message.text) {
-        response = config.quick_err_handling;
+        /*
+        let payload_msg = received_message.text;
+        let posback = {
+            "payload": payload_msg
+        }
+        */
+       response = config.quick_err_handling;
     }
 
     // Sends the response message
@@ -204,8 +210,7 @@ async function handlePostback(sender_psid, received_postback) {
         case "REACTIVATE_BOT":
             takeControlApi(sender_psid);
             break;
-
-       case "PLANSPRICNING":
+       case "PLANSPRICING":
            response = config.plansPricing;
            callSendAPI(sender_psid, response)
            break;
@@ -250,6 +255,7 @@ async function handlePostback(sender_psid, received_postback) {
                 console.log(err)
                 response = config.quick_err_handling;
                 callSendAPI(sender_psid, response)
+                console.log("error raised in handle postback")
             }
     }
     // callSendAPI(sender_psid, response)
