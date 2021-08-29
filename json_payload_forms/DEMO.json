@@ -1,14 +1,22 @@
+
 {
-    "text": "دا نموذج لمحل بيع ملابس , تقدر تعمل اوردر وهمي منه لتجربة البوت\n تحب تتسوق في ايه؟",
-    "quick_replies":[
+  "attachment": {
+    "type": "template",
+    "payload": {
+      "template_type": "button",
+      "text": "دا نموذج لمحل بيع ملابس , تقدر تعمل اوردر وهمي منه لتجربة البوت\n تحب تتسوق في ايه؟",
+      "buttons": [
         {
-          "content_type":"text",
-          "title":"تشيرتات",
-          "payload":"SHIRTS"
-        },{
-          "content_type":"text",
-          "title":"بنطلونات",
-          "payload":"PANTS"
+          "type": "postback",
+          "title": "تشيرتات",
+          "payload": "SHIRTS"
+        },
+        {
+          "type": "postback",
+          "title": "بنطلونات",
+          "payload": "PANTS"
         }
       ]
+    }
+  }
 }
