@@ -120,15 +120,59 @@ function handleMessage(sender_psid, received_message) {
         // Gets the URL of the message attachment
         let attachment_url = received_message.attachments[0].payload.url;
         response = {"text": ""}
+        callSendAPI(sender_psid, response)
     }
     else if(received_message.text) {
-        /*
+        
         let payload_msg = received_message.text;
         let posback = {
             "payload": payload_msg
         }
-        */
-       response = config.quick_err_handling;
+        
+        switch(payload_msg) {
+
+            // Presistent Menu
+                case "تجربة البوت":
+                    response = config.demo_payload;
+                    callSendAPI(sender_psid, response)
+                    break;
+
+                case "الأشتراك و الأسعار":
+                    //takeControlApi(sender_psid);
+                    //response = {"text": "برجاء التحدث مع احد مندوبينا لمناقشة الاسعار وكيفية الاشتراك."}
+                    response = config.plansPricing;
+                    callSendAPI(sender_psid, response)
+                    break;
+        
+                case "التحدث مع مندوب":
+                    response = config.stp_bot;
+                    //{"text": "تم ايقاف البوت, من فضلك ارسل استفسارك وسيتم الرد عليك من قبل احد مندوبينا في اسرع وقت ممكن 😊\nلاعادة تشغيل البوت برجاء ارسال كلمة activate",}
+                    callSendAPI(sender_psid, response);
+                    
+                    handoverProtocol(sender_psid);
+                    /*
+                    setTimeout(() => {
+                        if(reactivate == false){
+                            takeControlApi(sender_psid);
+                        }
+                        
+                    }, 6000) // 300000 = 5 min
+                    */
+                   
+                    break;
+    
+                case "الذهاب الي عربة التسوق":
+                    response = config.compose_cart_url(sender_psid);
+                    callSendAPI(sender_psid, response)
+                    break;
+        
+                default:
+                        console.log(err)
+                        response = config.quick_err_handling;
+                        callSendAPI(sender_psid, response)
+                        console.log("error raised in handle postback")
+            }
+       //response = config.quick_err_handling;
     }
 
     // Sends the response message
