@@ -167,7 +167,7 @@ function handleMessage(sender_psid, received_message) {
                     break;
         
                 default:
-                        console.log(err)
+                        //console.log(err)
                         response = config.quick_err_handling;
                         callSendAPI(sender_psid, response)
                         console.log("error raised in handle postback")
