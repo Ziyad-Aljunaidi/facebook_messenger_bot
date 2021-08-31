@@ -168,7 +168,20 @@ function handleMessage(sender_psid, received_message) {
                     response = config.compose_cart_url(sender_psid);
                     callSendAPI(sender_psid, response)
                     break;
-        
+
+                // Bot Example || Clothing shop
+                case "تيشيرتات":
+                case "تشيرتات":
+                    response = config.shirts_payload;
+                    callSendAPI(sender_psid, response);
+                    break;
+
+                case "بنطلونات":
+                    response = config.pants_payload;
+                    callSendAPI(sender_psid, response);
+                    break;
+                
+                // Default Error  Handling || received unrecognizable text
                 default:
                         //console.log(err)
                         response = config.quick_err_handling;
@@ -181,6 +194,7 @@ function handleMessage(sender_psid, received_message) {
     // Sends the response message
     //callSendAPI(sender_psid, response);
 }
+
 
 // Handles messaging_postback events
 
@@ -209,20 +223,11 @@ async function handlePostback(sender_psid, received_postback) {
 
         case "custom_question_2": 
         case "AGENT":
-            response = config.stp_bot;
-            //{"text": "تم ايقاف البوت, من فضلك ارسل استفسارك وسيتم الرد عليك من قبل احد مندوبينا في اسرع وقت ممكن 😊\nلاعادة تشغيل البوت برجاء ارسال كلمة activate",}
+            // response = config.stp_bot;
+            response = {"text": "😊 احد مندوبينا هيكون معاك ف اسرع"}
             callSendAPI(sender_psid, response);
             
-            handoverProtocol(sender_psid);
-            /*
-            setTimeout(() => {
-                if(reactivate == false){
-                    takeControlApi(sender_psid);
-                }
-                
-            }, 6000) // 300000 = 5 min
-            */
-           
+            // handoverProtocol(sender_psid);
             break;
 
         case "custom_question_3":
