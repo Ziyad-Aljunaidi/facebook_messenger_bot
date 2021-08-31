@@ -132,18 +132,21 @@ function handleMessage(sender_psid, received_message) {
         switch(payload_msg) {
 
             // Presistent Menu
+                case  "نموذج البوت":
                 case "تجربة البوت":
                     response = config.demo_payload;
                     callSendAPI(sender_psid, response)
                     break;
 
+                case "الاسعار":
                 case "الأشتراك و الأسعار":
                     //takeControlApi(sender_psid);
                     //response = {"text": "برجاء التحدث مع احد مندوبينا لمناقشة الاسعار وكيفية الاشتراك."}
                     response = config.plansPricing;
                     callSendAPI(sender_psid, response)
                     break;
-        
+
+                case "التحدث الي مندوب":
                 case "التحدث مع مندوب":
                     response = config.stp_bot;
                     //{"text": "تم ايقاف البوت, من فضلك ارسل استفسارك وسيتم الرد عليك من قبل احد مندوبينا في اسرع وقت ممكن 😊\nلاعادة تشغيل البوت برجاء ارسال كلمة activate",}
