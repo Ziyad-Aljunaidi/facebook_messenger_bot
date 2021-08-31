@@ -186,7 +186,7 @@ function handleMessage(sender_psid, received_message) {
                 // Default Error  Handling || received unrecognizable text
                 default:
                         //console.log(err)
-                        response = config.quick_err_handling;
+                        response = ""//config.quick_err_handling;
                         callSendAPI(sender_psid, response)
                         console.log("error raised in handle postback")
             }
