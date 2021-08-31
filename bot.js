@@ -148,8 +148,8 @@ function handleMessage(sender_psid, received_message) {
 
                 case "التحدث الي مندوب":
                 case "التحدث مع مندوب":
-                    response = config.stp_bot;
-                    //{"text": "تم ايقاف البوت, من فضلك ارسل استفسارك وسيتم الرد عليك من قبل احد مندوبينا في اسرع وقت ممكن 😊\nلاعادة تشغيل البوت برجاء ارسال كلمة activate",}
+                    // response = config.stp_bot;
+                    response = {"text": "😊 احد مندوبينا هيكون معاك ف اسرع"}
                     callSendAPI(sender_psid, response);
                     
                     handoverProtocol(sender_psid);
