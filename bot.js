@@ -229,7 +229,7 @@ async function handlePostback(sender_psid, received_postback) {
         case "custom_question_2": 
         case "AGENT":
             // response = config.stp_bot;
-            response = {"text": "😊 احد مندوبينا هيكون معاك ف اسرع"}
+            response = {"text": "😊 احد مندوبينا هيكون معاك في اسرع وقت"}
             callSendAPI(sender_psid, response);
             
             // handoverProtocol(sender_psid);
