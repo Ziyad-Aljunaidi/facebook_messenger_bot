@@ -149,7 +149,7 @@ function handleMessage(sender_psid, received_message) {
                 case "التحدث الي مندوب":
                 case "التحدث مع مندوب":
                     // response = config.stp_bot;
-                    response = {"text": "😊 احد مندوبينا هيكون معاك ف اسرع"}
+                    response = {"text": "😊 احد مندوبينا هيكون معاك في اسرع وقت"}
                     callSendAPI(sender_psid, response);
                     
                     handoverProtocol(sender_psid);
