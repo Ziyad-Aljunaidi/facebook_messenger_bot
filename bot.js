@@ -139,6 +139,7 @@ function handleMessage(sender_psid, received_message) {
                     break;
 
                 case "الاسعار":
+                case "الاشتراك":
                 case "الأشتراك و الأسعار":
                     //takeControlApi(sender_psid);
                     //response = {"text": "برجاء التحدث مع احد مندوبينا لمناقشة الاسعار وكيفية الاشتراك."}
@@ -165,6 +166,7 @@ function handleMessage(sender_psid, received_message) {
                     break;
     
                 case "الذهاب الي عربة التسوق":
+                case "عربة التسوق":
                     response = config.compose_cart_url(sender_psid);
                     callSendAPI(sender_psid, response)
                     break;
